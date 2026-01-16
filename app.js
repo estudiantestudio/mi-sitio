@@ -1,5 +1,5 @@
 function comprar() {
-  const numeroWhatsApp = "56942989334"; // CAMBIA este número
+  const numeroWhatsApp = "56942989334";
   const mensaje = encodeURIComponent(
     "Hola, quiero comprar el producto. ¿Me puedes dar más información?"
   );
