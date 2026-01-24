@@ -1,1 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Producto | Tienda Aromas</title>
+  <meta name="description" content="Página de producto: imágenes, beneficios, opciones, precio, envío, reviews y compra directa.">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="topbar">
+      <div class="brand">
+        <span class="brand-mark">🕯️</span>
+        <a href="index.html" class="brand-name">Tienda Aromas</a>
+      </div>
+
+      <div class="search">
+        <input id="searchInput" type="search" placeholder="🔍 Buscar..." onkeydown="if(event.key==='Enter'){window.location='index.html#catalogo'}" />
+      </div>
+
+      <div class="header-actions">
+        <a class="btn ghost" href="index.html#catalogo">Volver al catálogo</a>
+        <button class="btn primary" onclick="irAWhatsapp()">WhatsApp</button>
+      </div>
+    </div>
+
+    <nav class="mega-nav">
+      <a class="nav-item" href="index.html#lo-nuevo">🕯️ Lo nuevo</a>
+      <a class="nav-item" href="index.html#mas-vendidos">🔥 Más vendidos</a>
+      <a class="nav-item" href="index.html#catalogo">🧿 Catálogo</a>
+      <a class="nav-item" href="index.html#guias">📌 Guías</a>
+      <a class="nav-item" href="index.html#soporte">🛠️ Soporte</a>
+    </nav>
+  </header>
+
+  <main class="pdp">
+    <section class="pdp-grid" id="pdpContainer">
+      <!-- Se llena por JS -->
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>También te puede gustar</h2>
+        <p class="muted">Productos relacionados por intención y aroma.</p>
+      </div>
+      <div class="cards" id="relatedGrid"></div>
+    </section>
+  </main>
+
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    renderPDP();
+  </script>
+</body>
+</html>
 
