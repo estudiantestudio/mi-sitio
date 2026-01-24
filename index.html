@@ -3,149 +3,323 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tienda | Catálogo de Productos</title>
-  <meta name="description" content="Tienda moderna con productos, precios y compra directa por WhatsApp o pago online.">
-
+  <title>Tienda Aromas | Inciensos, Velas y Ritual</title>
+  <meta name="description" content="Crea atmósferas únicas, calma tu mente y transforma tu espacio. Inciensos, velas, aromatizantes, kits y artesanías.">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav class="nav">
-    <div class="brand">Mi Tienda</div>
-
-    <div class="nav-actions">
-      <a class="nav-link" href="#productos">Productos</a>
-      <a class="nav-link" href="#faq">FAQ</a>
-      <button class="btn btn-outline" onclick="irAWhatsapp()">WhatsApp</button>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <header class="hero">
-    <div class="hero-content">
-      <span class="badge">Envíos rápidos • Garantía • Soporte</span>
-      <h1>Compra productos que se ven y se sienten <span class="accent">premium</span>.</h1>
-      <p>
-        Catálogo moderno con precios claros, imágenes y compra directa.
-        Elige tu producto y compra en segundos.
-      </p>
-
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="#productos">Ver productos</a>
-        <button class="btn btn-secondary" onclick="irAWhatsapp()">Comprar por WhatsApp</button>
+  <!-- HEADER — navegación que vende -->
+  <header class="site-header">
+    <div class="topbar">
+      <div class="brand">
+        <span class="brand-mark">🕯️</span>
+        <a href="index.html" class="brand-name">Tienda Aromas</a>
       </div>
 
-      <div class="trust">
-        <div class="trust-item">⭐ 4.9/5 reseñas</div>
-        <div class="trust-item">🔒 Pago seguro</div>
-        <div class="trust-item">✅ Garantía</div>
+      <div class="search">
+        <input id="searchInput" type="search" placeholder="🔍 Buscar inciensos, velas, kits..." />
+      </div>
+
+      <div class="header-actions">
+        <button class="btn ghost" id="openAccountBtn">👤 Cuenta</button>
+        <button class="btn primary" onclick="irAWhatsapp()">WhatsApp</button>
       </div>
     </div>
 
-    <div class="hero-image">
-      <!-- Imagen llamativa (cambia la URL por tu foto) -->
-      <img
-        src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=80"
-        alt="Imagen llamativa del producto"
-      />
-    </div>
-  </header>
+    <!-- Mega-menú -->
+    <nav class="mega-nav">
+      <a class="nav-item" href="#lo-nuevo">🕯️ Lo nuevo</a>
+      <a class="nav-item" href="#mas-vendidos">🔥 Más vendidos / Top tendencia</a>
 
-  <!-- INFO -->
-  <section class="section">
-    <div class="grid-3">
-      <div class="card mini">
-        <h3>Diseño moderno</h3>
-        <p>Presentación limpia, profesional y enfocada en vender.</p>
-      </div>
-      <div class="card mini">
-        <h3>Compra fácil</h3>
-        <p>Botón directo a WhatsApp o a tu link de pago.</p>
-      </div>
-      <div class="card mini">
-        <h3>Confianza</h3>
-        <p>Garantía, políticas y secciones claras para convertir.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRODUCTOS -->
-  <section id="productos" class="section">
-    <div class="section-head">
-      <h2>Productos destacados</h2>
-      <p>Selecciona un producto y compra al instante.</p>
-    </div>
-
-    <div class="products" id="products"></div>
-  </section>
-
-  <!-- MODAL (producto) -->
-  <div class="modal" id="modal">
-    <div class="modal-content">
-      <button class="modal-close" onclick="cerrarModal()">✕</button>
-
-      <div class="modal-grid">
-        <img id="mImg" class="modal-img" alt="Producto"/>
-        <div>
-          <h3 id="mName"></h3>
-          <p class="price" id="mPrice"></p>
-          <p id="mDesc" class="muted"></p>
-
-          <div class="buy-actions">
-            <button class="btn btn-primary" onclick="comprarSeleccion('whatsapp')">
-              Comprar por WhatsApp
-            </button>
-
-            <button class="btn btn-secondary" onclick="comprarSeleccion('wepay')">
-              Pagar online (WePay)
-            </button>
-          </div>
-
-          <p class="small muted">
-            * Puedes configurar WePay (link) o dejar solo WhatsApp.
-          </p>
+      <div class="nav-item dropdown">
+        <button class="dropbtn">🪔 Por uso / intención</button>
+        <div class="dropdown-content">
+          <a href="#catalogo" onclick="setFilter('intencion','Relajación')">Relajación</a>
+          <a href="#catalogo" onclick="setFilter('intencion','Ritual')">Ritual</a>
+          <a href="#catalogo" onclick="setFilter('intencion','Meditación')">Meditación</a>
+          <a href="#catalogo" onclick="setFilter('intencion','Hogar aromático')">Hogar aromático</a>
         </div>
       </div>
+
+      <div class="nav-item dropdown">
+        <button class="dropbtn">🧿 Por tipo de producto</button>
+        <div class="dropdown-content">
+          <a href="#catalogo" onclick="setFilter('tipo','Inciensos')">Inciensos</a>
+          <a href="#catalogo" onclick="setFilter('tipo','Velas')">Velas</a>
+          <a href="#catalogo" onclick="setFilter('tipo','Aromatizantes')">Aromatizantes</a>
+          <a href="#catalogo" onclick="setFilter('tipo','Kits')">Kits</a>
+          <a href="#catalogo" onclick="setFilter('tipo','Decoración espiritual')">Decoración espiritual</a>
+        </div>
+      </div>
+
+      <a class="nav-item" href="#regalos">🎁 Regalos & Sets especiales</a>
+      <a class="nav-item" href="#artesanias">🪶 Artesanías</a>
+      <a class="nav-item" href="#guias">📌 Guías & Inspiración</a>
+      <a class="nav-item" href="#soporte">🛠️ Ayuda / Soporte</a>
+    </nav>
+  </header>
+
+  <!-- HOME — La portada que inspira + convierte -->
+  <main>
+
+    <!-- A) Banner principal llamativo -->
+    <section class="hero">
+      <div class="hero-content">
+        <p class="kicker">Bienestar • Calma • Espiritualidad • Cuidado</p>
+        <h1>Crea atmósferas únicas, calma tu mente y transforma tu espacio</h1>
+
+        <div class="hero-badges">
+          <span class="pill">✨ Aromas por intención</span>
+          <span class="pill">🚚 Envío gratis desde $45.000</span>
+          <span class="pill">⭐ ⭐ ⭐ ⭐ ⭐</span>
+        </div>
+
+        <div class="hero-cta">
+          <a class="btn primary" href="#colecciones">Explora colecciones</a>
+          <a class="btn outline" href="#catalogo">Ver catálogo</a>
+        </div>
+
+        <div class="banner-copy">
+          <p>✔️ “Descubre aromas que transforman tu espacio”</p>
+          <p>✔️ “Crea tu ambiente ideal — velas y aromas artesanales”</p>
+          <p>✔️ “Ritual y relajación en cada varilla”</p>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <!-- Cambia esta imagen por tu foto (puedes subirla a /img) -->
+        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1400&q=80"
+             alt="Incienso encendido y velas en espacio tranquilo">
+      </div>
+    </section>
+
+    <!-- B) Sección “Lo nuevo” -->
+    <section id="lo-nuevo" class="section">
+      <div class="section-head">
+        <h2>🕯️ Lo nuevo</h2>
+        <p>Novedades en inciensos, velas y más.</p>
+        <a class="link" href="#catalogo" onclick="setFilter('tag','NUEVO')">Ver novedades →</a>
+      </div>
+      <div class="cards" id="newGrid"></div>
+    </section>
+
+    <!-- C) Colecciones destacadas -->
+    <section id="colecciones" class="section alt">
+      <div class="section-head">
+        <h2>Colecciones destacadas</h2>
+        <p>Encuentra tu camino por intención, uso o regalo.</p>
+      </div>
+
+      <div class="collections">
+        <a class="collection" href="#catalogo" onclick="setFilter('coleccion','Ritual y meditación')">
+          <div class="col-img" style="background-image:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1400&q=80')"></div>
+          <div class="col-body">
+            <h3>🌿 Ritual y meditación</h3>
+            <p>Aromas para enfoque, calma y presencia.</p>
+            <span class="btn small outline">Comprar colección</span>
+          </div>
+        </a>
+
+        <a class="collection" href="#catalogo" onclick="setFilter('coleccion','Ambientación para el hogar')">
+          <div class="col-img" style="background-image:url('https://images.unsplash.com/photo-1522441815192-d9f04eb0615c?auto=format&fit=crop&w=1400&q=80')"></div>
+          <div class="col-body">
+            <h3>🏡 Ambientación para el hogar</h3>
+            <p>Transforma tu espacio con aromas envolventes.</p>
+            <span class="btn small outline">Comprar colección</span>
+          </div>
+        </a>
+
+        <a class="collection" href="#catalogo" onclick="setFilter('coleccion','Sets para regalo')">
+          <div class="col-img" style="background-image:url('https://images.unsplash.com/photo-1519682577862-22b62b24e493?auto=format&fit=crop&w=1400&q=80')"></div>
+          <div class="col-body">
+            <h3>🎁 Sets para regalo</h3>
+            <p>Regalos armados listos para sorprender.</p>
+            <span class="btn small outline">Comprar colección</span>
+          </div>
+        </a>
+
+        <a class="collection" href="#catalogo" onclick="setFilter('coleccion','Artesanías hechas a mano')">
+          <div class="col-img" style="background-image:url('https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1400&q=80')"></div>
+          <div class="col-body">
+            <h3>🪔 Artesanías hechas a mano</h3>
+            <p>Detalles únicos con energía y cuidado.</p>
+            <span class="btn small outline">Comprar colección</span>
+          </div>
+        </a>
+
+        <a class="collection" href="#catalogo" onclick="setFilter('coleccion','Aromas especiales por intención')">
+          <div class="col-img" style="background-image:url('https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1400&q=80')"></div>
+          <div class="col-body">
+            <h3>✨ Aromas especiales por intención</h3>
+            <p>Relajación, enfoque y purificación.</p>
+            <span class="btn small outline">Comprar colección</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- D) Más vendidos / Tendencia -->
+    <section id="mas-vendidos" class="section">
+      <div class="section-head">
+        <h2>🔥 Más vendidos / Tendencia</h2>
+        <p>Productos populares con excelente valoración.</p>
+        <a class="link" href="#catalogo" onclick="setFilter('tag','TOP')">Ver los más vendidos →</a>
+      </div>
+      <div class="cards" id="topGrid"></div>
+    </section>
+
+    <!-- E) Ofertas + urgencia -->
+    <section id="ofertas" class="section alt">
+      <div class="section-head">
+        <h2>✨ Ofertas + urgencia</h2>
+        <p>Hasta 40% OFF en selecciones especiales. Últimas unidades en productos destacados.</p>
+        <a class="link" href="#catalogo" onclick="setFilter('tag','OFERTA')">Ver ofertas →</a>
+      </div>
+      <div class="cards" id="offerGrid"></div>
+      <div class="urgency-note">⏰ Oferta por tiempo limitado • 🧯 Pocas unidades en algunos productos</div>
+    </section>
+
+    <!-- CATALOGO + filtros potentes -->
+    <section id="catalogo" class="section">
+      <div class="section-head">
+        <h2>Catálogo</h2>
+        <p>Filtra rápido como Nike: por aroma, intención, uso, precio y ⭐ valoración.</p>
+      </div>
+
+      <div class="filters">
+        <select id="filterTipo">
+          <option value="">🔹 Por tipo</option>
+          <option>Inciensos</option>
+          <option>Velas</option>
+          <option>Aromatizantes</option>
+          <option>Kits</option>
+          <option>Decoración espiritual</option>
+        </select>
+
+        <select id="filterIntencion">
+          <option value="">🔹 Por intención</option>
+          <option>Relajación</option>
+          <option>Enfoque</option>
+          <option>Purificación</option>
+          <option>Ritual</option>
+          <option>Meditación</option>
+          <option>Hogar aromático</option>
+          <option>Regalo</option>
+        </select>
+
+        <select id="filterAroma">
+          <option value="">🔹 Por tipo de aroma</option>
+          <option>Floral</option>
+          <option>Amaderado</option>
+          <option>Cítrico</option>
+          <option>Herbal</option>
+        </select>
+
+        <select id="filterRating">
+          <option value="">🔹 Por valoración</option>
+          <option value="4.5">⭐ 4.5+ </option>
+          <option value="4.8">⭐ 4.8+ </option>
+        </select>
+
+        <select id="filterPrecio">
+          <option value="">🔹 Por precio</option>
+          <option value="0-7990">$0 - $7.990</option>
+          <option value="8000-14990">$8.000 - $14.990</option>
+          <option value="15000-999999">$15.000+</option>
+        </select>
+
+        <button class="btn outline" onclick="clearFilters()">Limpiar filtros</button>
+      </div>
+
+      <div class="cards" id="catalogGrid"></div>
+    </section>
+
+    <!-- F) Captura de membresía -->
+    <section class="section alt">
+      <div class="member">
+        <div>
+          <h2>Únete y recibe 10% OFF en tu primera compra + ofertas exclusivas</h2>
+          <p class="muted">Recibe lanzamientos, rituales, beneficios y promociones.</p>
+        </div>
+        <form class="member-form" onsubmit="return subscribe(event)">
+          <input id="emailInput" type="email" placeholder="Tu correo" required />
+          <button class="btn primary" type="submit">Regístrate</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- G) Contenido útil -->
+    <section id="guias" class="section">
+      <div class="section-head">
+        <h2>📌 Guías & Inspiración</h2>
+        <p>Contenido que enseña y aumenta confianza.</p>
+      </div>
+
+      <div class="guides">
+        <article class="guide">
+          <h3>Cómo elegir tu incienso ideal</h3>
+          <p class="muted">Floral, amaderado, cítrico o herbal: qué significa cada uno.</p>
+          <button class="btn ghost" onclick="openGuide('incienso')">Ver guía</button>
+        </article>
+
+        <article class="guide">
+          <h3>Rituales de relajación paso a paso</h3>
+          <p class="muted">Crea un momento de calma con intención.</p>
+          <button class="btn ghost" onclick="openGuide('ritual')">Ver ritual</button>
+        </article>
+
+        <article class="guide">
+          <h3>Cuidado y limpieza de velas artesanales</h3>
+          <p class="muted">Maximiza duración y seguridad.</p>
+          <button class="btn ghost" onclick="openGuide('velas')">Ver tips</button>
+        </article>
+      </div>
+    </section>
+
+    <!-- H) Footer -->
+    <footer class="footer" id="soporte">
+      <div class="footer-col">
+        <h4>Tienda Aromas</h4>
+        <p class="muted">Bienestar, calma, espiritualidad y cuidado.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram">📷 Instagram</a>
+          <a href="#" aria-label="TikTok">🎵 TikTok</a>
+          <a href="#" aria-label="WhatsApp" onclick="irAWhatsapp();return false;">💬 WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Envíos y devoluciones</h4>
+        <a href="#" onclick="openPolicy('envios');return false;">Envíos</a>
+        <a href="#" onclick="openPolicy('devoluciones');return false;">Devoluciones</a>
+        <a href="#" onclick="openPolicy('politicas');return false;">Políticas</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Ayuda / Soporte</h4>
+        <a href="#" onclick="openPolicy('faq');return false;">FAQ</a>
+        <a href="#" onclick="irAWhatsapp();return false;">Contacto</a>
+        <a href="#" onclick="openPolicy('terminos');return false;">Términos y condiciones</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Promos</h4>
+        <p class="muted">✔️ “Hasta 40% OFF en selecciones especiales”</p>
+        <p class="muted">✔️ “Envío gratis desde $45.000”</p>
+        <p class="muted">✔️ “Únete y recibe 10% de descuento inmediato”</p>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Modal simple para guías/políticas -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div id="modalBody"></div>
     </div>
   </div>
-
-  <!-- FAQ -->
-  <section id="faq" class="section">
-    <div class="section-head">
-      <h2>Preguntas frecuentes</h2>
-      <p>Resolvemos dudas antes de comprar.</p>
-    </div>
-
-    <div class="faq">
-      <details>
-        <summary>¿Cuánto tarda el envío?</summary>
-        <p>Depende de tu zona. Normalmente 1–3 días hábiles.</p>
-      </details>
-      <details>
-        <summary>¿Qué pasa si no me gusta?</summary>
-        <p>Tienes garantía. Te ayudamos con cambio o devolución según la política.</p>
-      </details>
-      <details>
-        <summary>¿Cómo compro?</summary>
-        <p>Elige un producto y presiona “Comprar por WhatsApp” o “Pagar online”.</p>
-      </details>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div>
-      <strong>Mi Tienda</strong>
-      <p class="muted">Catálogo moderno para ventas online.</p>
-    </div>
-
-    <div class="footer-links">
-      <a href="#productos">Productos</a>
-      <a href="#faq">FAQ</a>
-      <a href="#" onclick="irAWhatsapp(); return false;">Contacto</a>
-    </div>
-  </footer>
 
   <script src="app.js"></script>
 </body>
