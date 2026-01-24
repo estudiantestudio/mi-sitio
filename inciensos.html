@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inciensos | Comfort Home</title>
+  <meta name="description" content="Encuentra el aroma perfecto para relajación, meditación, limpieza energética, amor, energía y dormir. Filtra por intención y familia aromática.">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="topbar">
+    <div class="brand">
+      <span class="brand-mark">🪔</span>
+      <a href="index.html" class="brand-name">Comfort Home</a>
+    </div>
+
+    <div class="search">
+      <input id="searchInputInc" type="search" placeholder="🔍 Buscar aroma: vainilla, lavanda, eucalipto..." />
+    </div>
+
+    <div class="header-actions">
+      <a class="btn ghost" href="index.html">Volver</a>
+      <button class="btn primary" onclick="irAWhatsapp()">WhatsApp</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO EMOCIONAL -->
+  <section class="hero hero-mini">
+    <div class="hero-inner">
+      <h1>Encuentra el aroma perfecto para cada momento de tu vida</h1>
+      <p>Filtra por cómo quieres sentirte y por familia de aroma. No necesitas saber “qué comprar”, solo lo que quieres lograr.</p>
+      <div class="hero-cta">
+        <a class="btn primary" href="#inciensosGrid">Explorar aromas</a>
+        <a class="btn outline" href="#miniTest">¿No sabes cuál elegir? Te ayudamos en 30 segundos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTRO 1: INTENCIÓN -->
+  <section class="section">
+    <div class="section-head">
+      <h2>¿Para qué lo quieres usar?</h2>
+      <p class="muted">Esto es oro: la gente no sabe qué aroma quiere, pero sí sabe cómo quiere sentirse.</p>
+    </div>
+
+    <div class="chips" id="chipsIntencion"></div>
+  </section>
+
+  <!-- FILTRO 2: FAMILIA AROMÁTICA -->
+  <section class="section">
+    <div class="section-head">
+      <h2>Elige el tipo de aroma</h2>
+      <p class="muted">Filtra por familia aromática: floral, herbal, dulce, amaderado…</p>
+    </div>
+
+    <div class="chips" id="chipsFamilia"></div>
+
+    <div class="filters" style="margin-top:14px;">
+      <button class="btn outline" onclick="clearIncenseFilters()">Limpiar filtros</button>
+    </div>
+  </section>
+
+  <!-- GRID PRODUCTOS -->
+  <section class="section" id="inciensosGrid">
+    <div class="section-head">
+      <h2>Inciensos</h2>
+      <p class="muted">Selecciona un incienso y verás su ficha completa con perfil aromático, usos e historia.</p>
+    </div>
+
+    <div class="cards" id="incenseGrid"></div>
+  </section>
+
+  <!-- MINI TEST -->
+  <section class="section" id="miniTest">
+    <div class="section-head">
+      <h2>Encuentra tu aroma ideal (30 segundos)</h2>
+      <p class="muted">Responde rápido y te recomiendo 2 aromas perfectos para ti.</p>
+    </div>
+
+    <div class="test-box">
+      <div class="test-row">
+        <label>1) ¿Qué buscas hoy?</label>
+        <select id="tGoal">
+          <option value="">Selecciona</option>
+          <option>Relajarme</option>
+          <option>Energizarme</option>
+          <option>Dormir mejor</option>
+          <option>Limpiar energías</option>
+          <option>Armonía / Amor</option>
+          <option>Enfoque</option>
+        </select>
+      </div>
+
+      <div class="test-row">
+        <label>2) ¿Qué aromas te gustan más?</label>
+        <select id="tTaste">
+          <option value="">Selecciona</option>
+          <option>Dulces</option>
+          <option>Frescos</option>
+          <option>Naturales (herbales)</option>
+          <option>Intensos (amaderados)</option>
+          <option>Floral suave</option>
+        </select>
+      </div>
+
+      <div class="test-row">
+        <label>3) ¿Dónde lo usarás?</label>
+        <select id="tPlace">
+          <option value="">Selecciona</option>
+          <option>Dormitorio</option>
+          <option>Oficina</option>
+          <option>Baño</option>
+          <option>Espacio espiritual</option>
+          <option>Sala / Hogar</option>
+        </select>
+      </div>
+
+      <button class="btn primary" onclick="runMiniTest()">Ver recomendación</button>
+      <div id="testResult" class="muted" style="margin-top:10px;"></div>
+    </div>
+  </section>
+
+  <!-- GUÍAS -->
+  <section class="section">
+    <div class="section-head">
+      <h2>Guías rápidas</h2>
+      <p class="muted">Cómo elegir incienso, intensidades y recomendaciones según tu momento.</p>
+    </div>
+
+    <div class="guide-grid">
+      <article class="guide">
+        <h3>Cómo elegir tu incienso ideal</h3>
+        <p>Si quieres relajarte: floral/dulce suave. Si quieres energía: cítrico/fresco. Para ritual: amaderado/herbal.</p>
+      </article>
+      <article class="guide">
+        <h3>Intensidad y espacios</h3>
+        <p>En lugares pequeños usa aromas suaves (⭐⭐⭐☆☆). Para sala grande puedes usar más intenso (⭐⭐⭐⭐☆).</p>
+      </article>
+      <article class="guide">
+        <h3>Ritual rápido de relajación</h3>
+        <p>Enciende, respira 1 minuto, apaga la llama y deja que el humo marque el inicio de tu pausa.</p>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<script src="app.js"></script>
+<script>
+  initIncenseCategoryPage();
+</script>
+</body>
+</html>
