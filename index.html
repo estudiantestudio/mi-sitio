@@ -1,50 +1,115 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Producto Profesional</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Compra un producto profesional que soluciona un problema real. Pago simple y seguro.">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tienda Aromas</title>
+  <meta name="description" content="Inciensos, velas, aromatizantes y artesanías. Bienestar, calma y espiritualidad." />
+  <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
 
-  <!-- HERO / VENTA -->
-  <header>
-    <h1>Soluciona este problema en poco tiempo</h1>
-    <p>Producto profesional diseñado para personas que quieren resultados reales.</p>
-    <button onclick="comprar()">Comprar ahora</button>
+  <!-- TOP NAV -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="brand">🕯️ <strong>Tienda Aromas</strong></div>
+    </div>
+
+    <div class="topbar-center">
+      <input class="search" type="search" placeholder="🔎 Buscar inciensos, velas, kits..." />
+    </div>
+
+    <div class="topbar-right">
+      <button class="btn btn-ghost">👤 Cuenta</button>
+      <button class="btn btn-primary" onclick="irAWhatsapp()">WhatsApp</button>
+    </div>
   </header>
 
-  <!-- BENEFICIOS -->
-  <section>
-    <h2>¿Por qué este producto?</h2>
-    <ul>
-      <li>✔ Resultados claros y comprobados</li>
-      <li>✔ Fácil de usar desde el primer día</li>
-      <li>✔ Ahorra tiempo y dinero</li>
-      <li>✔ Soporte directo por WhatsApp</li>
-    </ul>
-  </section>
+  <!-- MEGA CHIPS -->
+  <nav class="chips">
+    <a class="chip" href="#nuevo">🕯️ Lo nuevo</a>
+    <a class="chip" href="#top">🔥 Más vendidos / Top tendencia</a>
+    <a class="chip" href="#intencion">🪔 Por uso / intención</a>
 
-  <!-- CONFIANZA -->
-  <section>
-    <h2>Garantía</h2>
-    <p>Si no estás satisfecho, tienes garantía. Compra sin riesgo.</p>
-  </section>
+    <!-- ESTE ES EL LINK A TU PÁGINA NUEVA -->
+    <a class="chip" href="inciensos.html">🧿 Por tipo de producto</a>
 
-  <!-- CTA FINAL -->
-  <section>
-    <h2>¿Listo para comenzar?</h2>
-    <p>Haz clic y compra en menos de 1 minuto.</p>
-    <button onclick="comprar()">Comprar ahora</button>
-  </section>
+    <a class="chip" href="#regalos">🎁 Regalos & Sets especiales</a>
+    <a class="chip" href="#artesanias">🪶 Artesanías</a>
+    <a class="chip" href="#guias">📌 Guías & Inspiración</a>
+    <a class="chip" href="#soporte">🛠️ Ayuda / Soporte</a>
+  </nav>
 
-  <footer>
-    <p>© 2026 · Sitio profesional · Venta directa</p>
+  <!-- HERO -->
+  <main class="container">
+    <section class="hero">
+      <div class="hero-card">
+        <div class="pill-row">
+          <span class="pill">Bienestar · Calma · Espiritualidad · Cuidado</span>
+        </div>
+
+        <h1>Crea atmósferas únicas, calma tu mente y transforma tu espacio</h1>
+
+        <div class="pill-row">
+          <span class="pill">✨ Aromas por intención</span>
+          <span class="pill">🚚 Envío gratis desde $45.000</span>
+        </div>
+
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+
+        <div class="hero-actions">
+          <button class="btn btn-primary" onclick="abrirColecciones()">Explora colecciones</button>
+          <button class="btn btn-ghost" onclick="irACatalogo()">Ver catálogo</button>
+        </div>
+
+        <ul class="bullets">
+          <li>✔ “Descubre aromas que transforman tu espacio”</li>
+          <li>✔ “Crea tu ambiente ideal — velas y aromas artesanales”</li>
+          <li>✔ “Ritual y relajación en cada varilla”</li>
+        </ul>
+      </div>
+
+      <div class="hero-media">
+        <!-- Puedes cambiar esta imagen por una tuya -->
+        <img
+          src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80"
+          alt="Meditación y calma"
+        />
+      </div>
+    </section>
+
+    <!-- SECCIONES EJEMPLO -->
+    <section class="section" id="nuevo">
+      <div class="section-head">
+        <h2>🕯️ Lo nuevo</h2>
+        <a class="link" href="#catalogo">Ver novedades →</a>
+      </div>
+      <p class="muted">Novedades en inciensos, velas y más.</p>
+    </section>
+
+    <section class="section" id="top">
+      <div class="section-head">
+        <h2>🔥 Más vendidos</h2>
+      </div>
+      <p class="muted">Productos populares (puedes poner tarjetas aquí).</p>
+    </section>
+
+    <section class="section" id="soporte">
+      <div class="section-head">
+        <h2>🛠️ Soporte</h2>
+      </div>
+      <p class="muted">Escríbenos por WhatsApp o Instagram.</p>
+      <p>
+        <a class="link" href="https://www.instagram.com/comforthome.07/" target="_blank">📷 Instagram</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 · Tienda Aromas · Venta directa</p>
   </footer>
 
   <script src="app.js"></script>
 </body>
 </html>
-
