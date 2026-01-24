@@ -1,38 +1,152 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Mi primer sitio web</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tienda | Catálogo de Productos</title>
+  <meta name="description" content="Tienda moderna con productos, precios y compra directa por WhatsApp o pago online.">
+
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <header>
-    <h1>Bienvenido a mi sitio web</h1>
-    <p>Mi primer sitio gratuito con GitHub Pages 🚀</p>
-    <button>Comprar ahora</button>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="brand">Mi Tienda</div>
+
+    <div class="nav-actions">
+      <a class="nav-link" href="#productos">Productos</a>
+      <a class="nav-link" href="#faq">FAQ</a>
+      <button class="btn btn-outline" onclick="irAWhatsapp()">WhatsApp</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-content">
+      <span class="badge">Envíos rápidos • Garantía • Soporte</span>
+      <h1>Compra productos que se ven y se sienten <span class="accent">premium</span>.</h1>
+      <p>
+        Catálogo moderno con precios claros, imágenes y compra directa.
+        Elige tu producto y compra en segundos.
+      </p>
+
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#productos">Ver productos</a>
+        <button class="btn btn-secondary" onclick="irAWhatsapp()">Comprar por WhatsApp</button>
+      </div>
+
+      <div class="trust">
+        <div class="trust-item">⭐ 4.9/5 reseñas</div>
+        <div class="trust-item">🔒 Pago seguro</div>
+        <div class="trust-item">✅ Garantía</div>
+      </div>
+    </div>
+
+    <div class="hero-image">
+      <!-- Imagen llamativa (cambia la URL por tu foto) -->
+      <img
+        src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=80"
+        alt="Imagen llamativa del producto"
+      />
+    </div>
   </header>
 
-  <section>
-    <h2>¿Qué vendo?</h2>
-    <p>Un producto increíble que soluciona un problema real.</p>
+  <!-- INFO -->
+  <section class="section">
+    <div class="grid-3">
+      <div class="card mini">
+        <h3>Diseño moderno</h3>
+        <p>Presentación limpia, profesional y enfocada en vender.</p>
+      </div>
+      <div class="card mini">
+        <h3>Compra fácil</h3>
+        <p>Botón directo a WhatsApp o a tu link de pago.</p>
+      </div>
+      <div class="card mini">
+        <h3>Confianza</h3>
+        <p>Garantía, políticas y secciones claras para convertir.</p>
+      </div>
+    </div>
   </section>
 
-  <section>
-    <h2>Beneficios</h2>
-    <ul>
-      <li>✔ Fácil de usar</li>
-      <li>✔ Resultados reales</li>
-      <li>✔ Garantía incluida</li>
-    </ul>
+  <!-- PRODUCTOS -->
+  <section id="productos" class="section">
+    <div class="section-head">
+      <h2>Productos destacados</h2>
+      <p>Selecciona un producto y compra al instante.</p>
+    </div>
+
+    <div class="products" id="products"></div>
   </section>
 
-  <footer>
-    <p>© 2026 Mi sitio web</p>
+  <!-- MODAL (producto) -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="cerrarModal()">✕</button>
+
+      <div class="modal-grid">
+        <img id="mImg" class="modal-img" alt="Producto"/>
+        <div>
+          <h3 id="mName"></h3>
+          <p class="price" id="mPrice"></p>
+          <p id="mDesc" class="muted"></p>
+
+          <div class="buy-actions">
+            <button class="btn btn-primary" onclick="comprarSeleccion('whatsapp')">
+              Comprar por WhatsApp
+            </button>
+
+            <button class="btn btn-secondary" onclick="comprarSeleccion('wepay')">
+              Pagar online (WePay)
+            </button>
+          </div>
+
+          <p class="small muted">
+            * Puedes configurar WePay (link) o dejar solo WhatsApp.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <section id="faq" class="section">
+    <div class="section-head">
+      <h2>Preguntas frecuentes</h2>
+      <p>Resolvemos dudas antes de comprar.</p>
+    </div>
+
+    <div class="faq">
+      <details>
+        <summary>¿Cuánto tarda el envío?</summary>
+        <p>Depende de tu zona. Normalmente 1–3 días hábiles.</p>
+      </details>
+      <details>
+        <summary>¿Qué pasa si no me gusta?</summary>
+        <p>Tienes garantía. Te ayudamos con cambio o devolución según la política.</p>
+      </details>
+      <details>
+        <summary>¿Cómo compro?</summary>
+        <p>Elige un producto y presiona “Comprar por WhatsApp” o “Pagar online”.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div>
+      <strong>Mi Tienda</strong>
+      <p class="muted">Catálogo moderno para ventas online.</p>
+    </div>
+
+    <div class="footer-links">
+      <a href="#productos">Productos</a>
+      <a href="#faq">FAQ</a>
+      <a href="#" onclick="irAWhatsapp(); return false;">Contacto</a>
+    </div>
   </footer>
 
   <script src="app.js"></script>
 </body>
 </html>
-
