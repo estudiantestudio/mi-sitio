@@ -1,1 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Producto | Confort Home CN</title>
+  <meta name="description" content="Ficha completa del producto: imágenes, beneficios, favoritos, carrito y compra." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- HEADER simple (puedes copiar el tuyo si quieres) -->
+  <header class="site-header">
+    <div class="topbar">
+      <div class="brand">
+        <a href="index.html">
+          <img src="logo.png" alt="Confort Home CN" class="brand-logo">
+        </a>
+      </div>
+
+      <div class="header-actions">
+        <button class="btn ghost" onclick="openFavorites()">❤️ Favoritos <span id="favCount">(0)</span></button>
+        <button class="btn primary" onclick="openCart()">🛍️ Carrito <span id="cartCount">(0)</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="pdp">
+
+    <!-- PDP -->
+    <section class="pdp-grid">
+
+      <!-- Galería -->
+      <div class="gallery">
+        <div class="gallery-main">
+          <img id="mainImg" src="" alt="Imagen principal del producto">
+        </div>
+
+        <div class="thumbs" id="thumbs"></div>
+      </div>
+
+      <!-- Info -->
+      <div class="pdp-info">
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <h1 class="pdp-title" id="pName">Producto</h1>
+          <span class="badge-offer" id="pBadge" style="display:none;">TOP</span>
+        </div>
+
+        <p class="muted" id="pHook" style="margin-top:-6px; margin-bottom:10px;">
+          Frase gancho emocional (1 línea).
+        </p>
+
+        <div class="rating" id="pRating">⭐ 4.9 • 120 reseñas</div>
+
+        <ul class="bullets" id="pBullets"></ul>
+
+        <div class="pdp-row">
+          <div>
+            <label class="muted" for="variantSelect">Formato / Variación</label><br/>
+            <select id="variantSelect"></select>
+          </div>
+
+          <div>
+            <label class="muted" for="qtySelect">Cantidad</label><br/>
+            <select id="qtySelect">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="price">
+          <div class="now" id="pNow">$7.490</div>
+          <div class="was" id="pWas" style="display:none;">$9.490</div>
+        </div>
+
+        <!-- Botones PRO -->
+        <div class="card-actions">
+          <button class="btn ghost" id="favBtn" onclick="toggleFavorite()">❤️ Agregar a favoritos</button>
+          <button class="btn outline" onclick="addToCart()">Agregar al carrito</button>
+          <button class="btn primary" onclick="buyNow()">Comprar ahora</button>
+        </div>
+
+        <!-- Ficha sensorial -->
+        <div class="pdp-meta">
+          <p><strong>Tipo de aroma:</strong> <span id="pFamily">Herbal</span></p>
+          <p><strong>Notas aromáticas:</strong> <span id="pNotes">Romero • Verde</span></p>
+          <p><strong>Sensación:</strong> <span id="pFeeling">Enfoque, claridad</span></p>
+          <p><strong>Duración:</strong> <span id="pDuration">45–60 min</span></p>
+          <p><strong>Ambiente:</strong> <span id="pPlace">Oficina, sala</span></p>
+          <p><strong>Ideal para:</strong> <span id="pIdeal">Enfoque • Rutina productiva</span></p>
+          <p><strong>No recomendado:</strong> <span id="pNot">Si prefieres aromas dulces</span></p>
+        </div>
+
+        <!-- Historia -->
+        <div class="reviews">
+          <div class="review">
+            <div class="who">Historia del aroma</div>
+            <div class="muted" id="pStory">
+              Texto storytelling corto que vende emocionalmente.
+            </div>
+          </div>
+
+          <div class="review">
+            <div class="who">Si te gusta este aroma, también:</div>
+            <div class="muted" id="pAlso">Eucalipto • Menta • Sándalo</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Sección: productos sugeridos -->
+    <section class="section">
+      <div class="section-head">
+        <h2>También te puede gustar</h2>
+        <p class="muted">Recomendaciones tipo Netflix (cross-sell).</p>
+      </div>
+      <div class="cards" id="relatedGrid"></div>
+    </section>
+
+  </main>
+
+  <!-- CART DRAWER -->
+  <div class="modal" id="cartModal">
+    <div class="modal-content" style="max-width:980px;">
+      <button class="modal-close" onclick="closeCart()">✕</button>
+      <h2 style="margin-bottom:12px;">🛍️ Tu carrito</h2>
+      <div id="cartList"></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-top:14px;">
+        <div class="now">Total: <span id="cartTotal">$0</span></div>
+        <button class="btn primary" onclick="checkout()">Finalizar compra</button>
+      </div>
+      <p class="muted" style="margin-top:10px;">Checkout simple: resumen + confirmación. (Luego puedes conectar pago real).</p>
+    </div>
+  </div>
+
+  <!-- FAVORITES MODAL -->
+  <div class="modal" id="favModal">
+    <div class="modal-content" style="max-width:900px;">
+      <button class="modal-close" onclick="closeFavorites()">✕</button>
+      <h2 style="margin-bottom:12px;">❤️ Mis favoritos</h2>
+      <div class="cards" id="favGrid"></div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT MODAL -->
+  <div class="modal" id="checkoutModal">
+    <div class="modal-content" style="max-width:900px;">
+      <button class="modal-close" onclick="closeCheckout()">✕</button>
+      <h2 style="margin-bottom:10px;">✅ Confirmar compra</h2>
+      <div id="checkoutBody"></div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+        <button class="btn outline" onclick="closeCheckout()">Seguir comprando</button>
+        <button class="btn primary" onclick="confirmOrder()">Confirmar pedido</button>
+      </div>
+      <p class="muted" style="margin-top:10px;">Esto simula el checkout. Después lo conectamos a un pago real si quieres.</p>
+    </div>
+  </div>
+
+  <script src="producto.js"></script>
+</body>
+</html>
 
