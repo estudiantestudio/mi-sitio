@@ -1,15 +1,32 @@
 :root{
-  --bg:#0f1411;
-  --panel:#141b16;
-  --card:#171f19;
-  --border:rgba(255,255,255,.12);
-  --text:rgba(255,255,255,.92);
-  --muted:rgba(255,255,255,.65);
-  --earth:#c2a97e;
-  --leaf:#22c55e;
-  --accent:#f59e0b;
-  --shadow:0 18px 48px rgba(0,0,0,.45);
+  /* Base principal (fondo) */
+  --bg:#F3EFE7;      /* beige/arena */
+  --panel:#EDE6D8;   /* crema (paneles/secciones) */
+  --card:rgba(255,255,255,.62);
+
+  /* Bordes/sombra */
+  --border:rgba(90,70,52,.18);
+  --shadow:0 18px 48px rgba(20,16,10,.14);
+
+  /* Texto */
+  --text:#2B221A;    /* texto principal */
+  --muted:#6F6256;   /* texto secundario */
+
+  /* Marca (verde salvia/oliva) */
+  --leaf:#7A8F7A;
+  --leaf2:#6B7F6A;
+
+  /* Profundo madera */
+  --wood:#5A4634;
+
+  /* Acento dorado */
+  --accent:#C9A24D;
+  --accent2:#E0B76F;
+
+  /* Mantengo earth para links/gradientes (opcional) */
+  --earth:#C9A24D;
 }
+
 
 *{margin:0;padding:0;box-sizing:border-box}
 body{
