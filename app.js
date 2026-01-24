@@ -491,4 +491,265 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// ========= INCIENSOS: DATA EJEMPLO (edítalo con tus productos reales) =========
+const INCENSES = [
+  {
+    id: "inc-vainilla",
+    name: "Incienso de Vainilla – Calma dulce",
+    variedad: "Vainilla",
+    familia: "🍯 Dulce",
+    intencion: ["😌 Relajación","💤 Dormir","🏡 Hogar / ambiente"],
+    intensidad: 3,
+    duracion: "45–60 min",
+    sensacion: "Cálido, acogedor",
+    ambiente: "Dormitorio, sala",
+    ideal: ["Reducir estrés", "Crear ambiente acogedor", "Relajación nocturna"],
+    noRecom: ["Espacios muy pequeños si eres sensible"],
+    story: "La vainilla envuelve el ambiente con un dulzor suave que baja la tensión y crea sensación de hogar.",
+    also: ["Lavanda", "Rosa", "Manzanilla"],
+    price: 6990,
+    wasPrice: 8990
+  },
+  {
+    id: "inc-lavanda",
+    name: "Incienso de Lavanda – Relajación profunda",
+    variedad: "Lavanda",
+    familia: "🌸 Floral",
+    intencion: ["😌 Relajación","🧘 Meditación","💤 Dormir"],
+    intensidad: 3,
+    duracion: "45–60 min",
+    sensacion: "Calmante, suave",
+    ambiente: "Dormitorio, baño",
+    ideal: ["Dormir mejor", "Reducir ansiedad", "Meditación"],
+    noRecom: ["Si no te gustan aromas florales"],
+    story: "Usada desde la antigüedad para calmar la mente y equilibrar emociones. Crea paz instantánea.",
+    also: ["Vainilla", "Manzanilla", "Sándalo"],
+    price: 7490,
+    wasPrice: 9490
+  },
+  {
+    id: "inc-eucalipto",
+    name: "Incienso de Eucalipto – Aire limpio",
+    variedad: "Eucalipto",
+    familia: "🌿 Herbal",
+    intencion: ["🔮 Limpieza energética","🏡 Hogar / ambiente","🔥 Energía / motivación"],
+    intensidad: 4,
+    duracion: "45–60 min",
+    sensacion: "Fresco, despeja",
+    ambiente: "Sala, baño",
+    ideal: ["Sentir aire limpio", "Enfoque", "Renovar energía"],
+    noRecom: ["Dormitorios si eres sensible a aromas intensos"],
+    story: "El eucalipto se asocia a claridad y renovación: perfecto para comenzar de nuevo.",
+    also: ["Menta", "Romero", "Limón"],
+    price: 7490,
+    wasPrice: 9490
+  },
+  {
+    id: "inc-romero",
+    name: "Incienso de Romero – Enfoque natural",
+    variedad: "Romero",
+    familia: "🌿 Herbal",
+    intencion: ["🧘 Meditación","🔥 Energía / motivación","🏡 Hogar / ambiente"],
+    intensidad: 4,
+    duracion: "45–60 min",
+    sensacion: "Verde, despierta",
+    ambiente: "Oficina, sala",
+    ideal: ["Enfoque", "Motivación", "Rutina productiva"],
+    noRecom: ["Si prefieres aromas dulces"],
+    story: "El romero es símbolo de claridad mental y energía. Ideal para días de estudio o trabajo.",
+    also: ["Eucalipto", "Menta", "Sándalo"],
+    price: 7490,
+    wasPrice: 9490
+  },
+  {
+    id: "inc-yagra",
+    name: "Incienso de Yagrá – Ritual y protección",
+    variedad: "Yagrá",
+    familia: "🌲 Amaderado",
+    intencion: ["🔮 Limpieza energética","🔮 Limpieza energética","💕 Amor / armonía"],
+    intensidad: 4,
+    duracion: "45–60 min",
+    sensacion: "Místico, envolvente",
+    ambiente: "Espacio espiritual",
+    ideal: ["Rituales", "Purificación", "Ambiente espiritual"],
+    noRecom: ["Espacios cerrados sin ventilación"],
+    story: "Tradicionalmente usado en rituales para armonizar el espacio y elevar la intención.",
+    also: ["Palo Santo", "Sándalo", "Lavanda"],
+    price: 7990,
+    wasPrice: 9990
+  },
+  {
+    id: "inc-english",
+    name: "Incienso English – Frescura elegante",
+    variedad: "English",
+    familia: "🌊 Fresco",
+    intencion: ["🏡 Hogar / ambiente","😌 Relajación","💕 Amor / armonía"],
+    intensidad: 3,
+    duracion: "45–60 min",
+    sensacion: "Limpio, elegante",
+    ambiente: "Sala, oficina",
+    ideal: ["Aromatizar sin empalagar", "Ambiente premium", "Calma suave"],
+    noRecom: ["Si buscas aromas intensos"],
+    story: "Un perfil limpio y sofisticado, ideal para perfumar la casa con elegancia.",
+    also: ["Algodón", "Lluvia", "Lavanda"],
+    price: 7990,
+    wasPrice: 9990
+  },
+];
+
+// ========= UI: chips + filtros + render =========
+let incFilterIntencion = "";
+let incFilterFamilia = "";
+
+function initIncenseCategoryPage(){
+  const grid = document.getElementById("incenseGrid");
+  if (!grid) return;
+
+  const intents = [
+    "😌 Relajación","🧘 Meditación","🔮 Limpieza energética","💕 Amor / armonía",
+    "🔥 Energía / motivación","💤 Dormir","🏡 Hogar / ambiente"
+  ];
+  const families = [
+    "🌸 Floral","🌿 Herbal","🌲 Amaderado","🍋 Cítrico","🌶️ Especiado","🍯 Dulce","🌊 Fresco"
+  ];
+
+  const chipsInt = document.getElementById("chipsIntencion");
+  const chipsFam = document.getElementById("chipsFamilia");
+  const search = document.getElementById("searchInputInc");
+
+  chipsInt.innerHTML = intents.map(t => `<button class="chip" data-type="int" data-value="${t}">${t}</button>`).join("");
+  chipsFam.innerHTML = families.map(t => `<button class="chip" data-type="fam" data-value="${t}">${t}</button>`).join("");
+
+  function updateActive(){
+    document.querySelectorAll('.chip[data-type="int"]').forEach(b=>{
+      b.classList.toggle("active", b.dataset.value === incFilterIntencion);
+    });
+    document.querySelectorAll('.chip[data-type="fam"]').forEach(b=>{
+      b.classList.toggle("active", b.dataset.value === incFilterFamilia);
+    });
+  }
+
+  function stars(n){
+    const full = "⭐".repeat(Math.max(0, Math.min(5, n)));
+    const empty = "☆".repeat(Math.max(0, 5 - n));
+    return full + empty;
+  }
+
+  function render(){
+    updateActive();
+    const q = (search?.value || "").toLowerCase().trim();
+
+    const list = INCENSES
+      .filter(p => !incFilterFamilia || p.familia === incFilterFamilia)
+      .filter(p => !incFilterIntencion || p.intencion.includes(incFilterIntencion))
+      .filter(p => {
+        if (!q) return true;
+        const hay = (p.name + " " + p.variedad + " " + p.story + " " + p.familia).toLowerCase();
+        return hay.includes(q);
+      });
+
+    if (list.length === 0){
+      grid.innerHTML = `<p class="muted">No se encontraron inciensos con esos filtros.</p>`;
+      return;
+    }
+
+    grid.innerHTML = list.map(p => `
+      <article class="card">
+        <div class="card-body">
+          <h3>${p.name}</h3>
+          <p class="muted">${p.familia} • ${p.variedad}</p>
+
+          <div class="mini-profile">
+            <p><strong>Perfil:</strong> Intensidad ${stars(p.intensidad)} • Duración ${p.duracion}</p>
+            <p><strong>Sensación:</strong> ${p.sensacion} • <strong>Ambiente:</strong> ${p.ambiente}</p>
+          </div>
+
+          <div class="bullets">
+            <p><strong>✔ Ideal para:</strong> ${p.ideal.join(" • ")}</p>
+            <p><strong>❌ No recomendado:</strong> ${p.noRecom.join(" • ")}</p>
+          </div>
+
+          <p class="muted"><strong>Historia:</strong> ${p.story}</p>
+          <p class="muted"><strong>Si te gusta este aroma, también:</strong> ${p.also.join(" • ")}</p>
+
+          <div class="price-row">
+            <div>
+              <span class="price">$${formatCLP(p.price)}</span>
+              ${p.wasPrice ? `<span class="was-price">$${formatCLP(p.wasPrice)}</span>` : ""}
+            </div>
+            <button class="btn primary" onclick="irAWhatsapp('${encodeURIComponent(p.name)}')">Comprar por WhatsApp</button>
+          </div>
+        </div>
+      </article>
+    `).join("");
+  }
+
+  document.addEventListener("click", (e)=>{
+    const btn = e.target.closest(".chip");
+    if(!btn) return;
+    const type = btn.dataset.type;
+    const val = btn.dataset.value;
+
+    if(type === "int"){
+      incFilterIntencion = (incFilterIntencion === val) ? "" : val;
+    } else {
+      incFilterFamilia = (incFilterFamilia === val) ? "" : val;
+    }
+    render();
+  });
+
+  if (search) search.addEventListener("input", render);
+
+  render();
+}
+
+function clearIncenseFilters(){
+  incFilterIntencion = "";
+  incFilterFamilia = "";
+  const search = document.getElementById("searchInputInc");
+  if (search) search.value = "";
+  initIncenseCategoryPage();
+}
+
+// ========= MINI TEST (simple pero efectivo) =========
+function runMiniTest(){
+  const goal = document.getElementById("tGoal").value;
+  const taste = document.getElementById("tTaste").value;
+  const place = document.getElementById("tPlace").value;
+  const out = document.getElementById("testResult");
+
+  if(!goal || !taste || !place){
+    out.textContent = "Completa las 3 preguntas para darte tu recomendación.";
+    return;
+  }
+
+  // reglas rápidas
+  let pick1 = "Lavanda";
+  let pick2 = "Sándalo";
+
+  if(goal === "Dormir mejor") { pick1 = "Lavanda"; pick2 = "Vainilla"; }
+  if(goal === "Limpiar energías") { pick1 = "Yagrá"; pick2 = "Eucalipto"; }
+  if(goal === "Energizarme") { pick1 = "Eucalipto"; pick2 = "Romero"; }
+  if(goal === "Armonía / Amor") { pick1 = "Vainilla"; pick2 = "English"; }
+  if(goal === "Relajarme") { pick1 = "Lavanda"; pick2 = "Vainilla"; }
+  if(goal === "Enfoque") { pick1 = "Romero"; pick2 = "Eucalipto"; }
+
+  out.innerHTML = `✅ Tu aroma ideal es: <strong>${pick1}</strong> + <strong>${pick2}</strong>. 
+  <br/>Consejo: úsalo en <strong>${place}</strong> y elige un perfil <strong>${taste}</strong>.`;
+}
+
+// ========= helpers (si no existían en tu app.js) =========
+function formatCLP(n){
+  return (n || 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+// irAWhatsapp: si ya lo tienes, no lo repitas; si no lo tienes, usa este:
+function irAWhatsapp(producto){
+  const num = "569XXXXXXXX"; // <-- CAMBIA AQUÍ TU NÚMERO
+  const base = `https://wa.me/${num}`;
+  const msg = producto
+    ? `Hola! Quiero comprar: ${decodeURIComponent(producto)}. ¿Me das info de envío y pago?`
+    : "Hola! Quiero comprar. ¿Me das info de envío y pago?";
+  window.open(`${base}?text=${encodeURIComponent(msg)}`, "_blank");
+}
 
