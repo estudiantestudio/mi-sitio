@@ -1,7 +1,4 @@
-/* ========= DATOS (EDITA AQUÍ tus productos) ========= */
-const PRODUCTS = [
-  {
-    /* ========= INTENCIONES (LISTA OFICIAL) ========= */
+/* ========= INTENCIONES (LISTA OFICIAL) ========= */
 const INTENCIONES = {
   "Relajación / Anti-estrés 🌙": [
     "Lavanda (English Lavender)",
@@ -67,6 +64,9 @@ const INTENCIONES = {
   ],
 };
 
+/* ========= DATOS (EDITA AQUÍ tus productos) ========= */
+const PRODUCTS = [
+  {
     id: "incienso-romero",
     name: "Incienso de Romero – Enfoque natural",
     hook: "Claridad mental y energía suave para días de estudio o trabajo.",
@@ -85,8 +85,7 @@ const INTENCIONES = {
     bullets: [
       "Aroma herbal limpio y estimulante",
       "Ideal para enfoque y energía/ motivación",
-      "Hecho con esencias naturales (puedes ajustar esto)",
-      "Formato premium, encendido uniforme"
+      "Formato premium, encendido uniforme",
     ],
     story:
       "El romero es símbolo de claridad mental y energía. Su aroma herbal ayuda a mantener la concentración y crear un ambiente activo sin ser invasivo.",
@@ -97,11 +96,12 @@ const INTENCIONES = {
       "https://images.unsplash.com/photo-1519682577862-22b62b24e493?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1522441815192-d9f04eb0615c?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1200&q=80",
     ],
     type: "Inciensos",
-    intent: ["Enfoque", "Energía / motivación"],
+    intenciones: ["Energía / Enfoque / Activación ⚡", "Naturales / Herbales 🌿"],
   },
+
   {
     id: "incienso-vainilla",
     name: "Incienso de Vainilla – Calma dulce",
@@ -121,7 +121,7 @@ const INTENCIONES = {
     bullets: [
       "Aroma dulce y suave (no invasivo)",
       "Ideal para relajación y descanso",
-      "Perfecto para hogar y ambientes cálidos"
+      "Perfecto para hogar y ambientes cálidos",
     ],
     story:
       "La vainilla se asocia con confort y calidez. Ayuda a crear ambientes acogedores, ideales para desconectar al final del día.",
@@ -132,11 +132,12 @@ const INTENCIONES = {
       "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1522441815192-d9f04eb0615c?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1200&q=80",
     ],
     type: "Inciensos",
-    intent: ["Relajación", "Dormir", "Hogar / ambiente"],
+    intenciones: ["Relajación / Anti-estrés 🌙", "Dulces / Cálidos / Sensoriales 🍯"],
   },
+
   {
     id: "incienso-lavanda",
     name: "Incienso de Lavanda – Relajación profunda",
@@ -156,7 +157,7 @@ const INTENCIONES = {
     bullets: [
       "Aroma floral calmante",
       "Ideal para dormir mejor y meditar",
-      "Ambiente suave y equilibrado"
+      "Ambiente suave y equilibrado",
     ],
     story:
       "La lavanda se usa desde la antigüedad para calmar la mente y equilibrar las emociones. Su aroma crea un espacio de paz y descanso.",
@@ -167,29 +168,33 @@ const INTENCIONES = {
       "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1522441815192-d9f04eb0615c?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1200&q=80",
     ],
     type: "Inciensos",
-    intent: ["Relajación", "Dormir", "Meditación"],
-  }
+    intenciones: ["Relajación / Anti-estrés 🌙", "Meditación / Espiritualidad 🧘"],
+  },
 ];
 
 /* ========= UTIL ========= */
 const money = (n) => "$" + (n || 0).toLocaleString("es-CL");
-const getIdFromUrl = () => new URLSearchParams(location.search).get("id") || "incienso-romero";
-const findProduct = (id) => PRODUCTS.find(p => p.id === id) || PRODUCTS[0];
+const getIdFromUrl = () =>
+  new URLSearchParams(location.search).get("id") || "incienso-romero";
+const findProduct = (id) => PRODUCTS.find((p) => p.id === id) || PRODUCTS[0];
 
 const LS_CART = "ch_cart_v1";
-const LS_FAV  = "ch_fav_v1";
+const LS_FAV = "ch_fav_v1";
 
 const load = (k, fallback) => {
-  try { return JSON.parse(localStorage.getItem(k)) ?? fallback; }
-  catch { return fallback; }
+  try {
+    return JSON.parse(localStorage.getItem(k)) ?? fallback;
+  } catch {
+    return fallback;
+  }
 };
 const save = (k, v) => localStorage.setItem(k, JSON.stringify(v));
 
 let cart = load(LS_CART, []); // [{id, variant, qty}]
-let fav  = load(LS_FAV, []);  // [id]
+let fav = load(LS_FAV, []); // [id]
 let current = findProduct(getIdFromUrl());
 
 /* ========= RENDER PDP ========= */
@@ -197,17 +202,23 @@ function renderPDP() {
   // Título / texto
   document.getElementById("pName").textContent = current.name;
   document.getElementById("pHook").textContent = current.hook;
-  document.getElementById("pRating").textContent = `⭐ ${current.rating} • ${current.reviews} reseñas`;
+  document.getElementById(
+    "pRating"
+  ).textContent = `⭐ ${current.rating} • ${current.reviews} reseñas`;
 
   // Badge
   const badge = document.getElementById("pBadge");
-  if (current.badge) { badge.style.display = "inline-block"; badge.textContent = current.badge; }
-  else { badge.style.display = "none"; }
+  if (current.badge) {
+    badge.style.display = "inline-block";
+    badge.textContent = current.badge;
+  } else {
+    badge.style.display = "none";
+  }
 
   // Bullets
   const ul = document.getElementById("pBullets");
   ul.innerHTML = "";
-  current.bullets.forEach(b => {
+  current.bullets.forEach((b) => {
     const li = document.createElement("li");
     li.textContent = b;
     ul.appendChild(li);
@@ -216,8 +227,12 @@ function renderPDP() {
   // Precio
   document.getElementById("pNow").textContent = money(current.priceNow);
   const pWas = document.getElementById("pWas");
-  if (current.priceWas) { pWas.style.display = "block"; pWas.textContent = money(current.priceWas); }
-  else { pWas.style.display = "none"; }
+  if (current.priceWas) {
+    pWas.style.display = "block";
+    pWas.textContent = money(current.priceWas);
+  } else {
+    pWas.style.display = "none";
+  }
 
   // Perfil
   document.getElementById("pFamily").textContent = current.family;
@@ -225,6 +240,16 @@ function renderPDP() {
   document.getElementById("pFeeling").textContent = current.feeling;
   document.getElementById("pDuration").textContent = current.duration;
   document.getElementById("pPlace").textContent = current.place;
+
+  // ✅ NUEVO: Uso / intención (si existe el span en producto.html)
+  const elInt = document.getElementById("pIntenciones");
+  if (elInt) {
+    elInt.textContent =
+      current.intenciones && current.intenciones.length
+        ? current.intenciones.join(" • ")
+        : "—";
+  }
+
   document.getElementById("pIdeal").textContent = current.ideal;
   document.getElementById("pNot").textContent = current.not;
   document.getElementById("pStory").textContent = current.story;
@@ -233,7 +258,7 @@ function renderPDP() {
   // Variantes
   const vs = document.getElementById("variantSelect");
   vs.innerHTML = "";
-  current.variants.forEach(v => {
+  current.variants.forEach((v) => {
     const opt = document.createElement("option");
     opt.value = v;
     opt.textContent = v;
@@ -249,7 +274,7 @@ function renderPDP() {
   current.images.forEach((src, idx) => {
     const im = document.createElement("img");
     im.src = src;
-    im.alt = `${current.name} - foto ${idx+1}`;
+    im.alt = `${current.name} - foto ${idx + 1}`;
     im.onclick = () => (main.src = src);
     thumbs.appendChild(im);
   });
@@ -266,11 +291,17 @@ function renderRelated() {
   const grid = document.getElementById("relatedGrid");
   grid.innerHTML = "";
 
-  const related = PRODUCTS
-    .filter(p => p.id !== current.id && p.type === current.type)
-    .slice(0, 4);
+  // ✅ Recomendados por intención real
+  const related = PRODUCTS.filter((p) => {
+    if (p.id === current.id) return false;
+    if (p.type !== current.type) return false;
 
-  related.forEach(p => {
+    const a = new Set(current.intenciones || []);
+    const b = p.intenciones || [];
+    return b.some((x) => a.has(x));
+  }).slice(0, 4);
+
+  related.forEach((p) => {
     const card = document.createElement("div");
     card.className = "card";
     card.innerHTML = `
@@ -290,9 +321,13 @@ function renderRelated() {
     `;
     grid.appendChild(card);
   });
+
+  if (related.length === 0) {
+    grid.innerHTML = `<div class="muted">Aún no hay recomendaciones por intención (agrega más productos).</div>`;
+  }
 }
 
-function quickAdd(id){
+function quickAdd(id) {
   const p = findProduct(id);
   cart.push({ id: p.id, variant: p.variants[0], qty: 1 });
   save(LS_CART, cart);
@@ -301,39 +336,38 @@ function quickAdd(id){
 }
 
 /* ========= FAVORITOS ========= */
-function isFav(id){ return fav.includes(id); }
-
-function updateFavButton(){
-  const btn = document.getElementById("favBtn");
-  if (isFav(current.id)) {
-    btn.textContent = "❤️ Quitar de favoritos";
-  } else {
-    btn.textContent = "❤️ Agregar a favoritos";
-  }
+function isFav(id) {
+  return fav.includes(id);
 }
 
-function toggleFavorite(){
-  if (isFav(current.id)) {
-    fav = fav.filter(x => x !== current.id);
-  } else {
-    fav.push(current.id);
-  }
+function updateFavButton() {
+  const btn = document.getElementById("favBtn");
+  if (!btn) return;
+  btn.textContent = isFav(current.id)
+    ? "❤️ Quitar de favoritos"
+    : "❤️ Agregar a favoritos";
+}
+
+function toggleFavorite() {
+  if (isFav(current.id)) fav = fav.filter((x) => x !== current.id);
+  else fav.push(current.id);
+
   save(LS_FAV, fav);
   updateFavButton();
   updateCounts();
 }
 
-function openFavorites(){
+function openFavorites() {
   const modal = document.getElementById("favModal");
   const grid = document.getElementById("favGrid");
   grid.innerHTML = "";
 
-  const items = fav.map(id => findProduct(id)).filter(Boolean);
+  const items = fav.map((id) => findProduct(id)).filter(Boolean);
 
   if (items.length === 0) {
     grid.innerHTML = `<div class="muted">Aún no tienes favoritos.</div>`;
   } else {
-    items.forEach(p => {
+    items.forEach((p) => {
       const card = document.createElement("div");
       card.className = "card";
       card.innerHTML = `
@@ -354,21 +388,22 @@ function openFavorites(){
 
   modal.classList.add("open");
 }
-function closeFavorites(){ document.getElementById("favModal").classList.remove("open"); }
-function removeFav(id){
-  fav = fav.filter(x => x !== id);
+function closeFavorites() {
+  document.getElementById("favModal").classList.remove("open");
+}
+function removeFav(id) {
+  fav = fav.filter((x) => x !== id);
   save(LS_FAV, fav);
   updateCounts();
   openFavorites();
 }
 
 /* ========= CARRITO ========= */
-function addToCart(){
+function addToCart() {
   const variant = document.getElementById("variantSelect").value;
   const qty = parseInt(document.getElementById("qtySelect").value, 10);
 
-  // Si ya existe mismo producto+variant, suma cantidad
-  const existing = cart.find(x => x.id === current.id && x.variant === variant);
+  const existing = cart.find((x) => x.id === current.id && x.variant === variant);
   if (existing) existing.qty += qty;
   else cart.push({ id: current.id, variant, qty });
 
@@ -377,13 +412,15 @@ function addToCart(){
   openCart();
 }
 
-function openCart(){
+function openCart() {
   renderCart();
   document.getElementById("cartModal").classList.add("open");
 }
-function closeCart(){ document.getElementById("cartModal").classList.remove("open"); }
+function closeCart() {
+  document.getElementById("cartModal").classList.remove("open");
+}
 
-function renderCart(){
+function renderCart() {
   const list = document.getElementById("cartList");
   list.innerHTML = "";
 
@@ -423,53 +460,61 @@ function renderCart(){
   document.getElementById("cartTotal").textContent = money(total);
 }
 
-function incQty(i){ cart[i].qty++; save(LS_CART, cart); renderCart(); updateCounts(); }
-function decQty(i){
+function incQty(i) {
+  cart[i].qty++;
+  save(LS_CART, cart);
+  renderCart();
+  updateCounts();
+}
+function decQty(i) {
   cart[i].qty--;
   if (cart[i].qty <= 0) cart.splice(i, 1);
   save(LS_CART, cart);
   renderCart();
   updateCounts();
 }
-function removeCart(i){ cart.splice(i,1); save(LS_CART, cart); renderCart(); updateCounts(); }
+function removeCart(i) {
+  cart.splice(i, 1);
+  save(LS_CART, cart);
+  renderCart();
+  updateCounts();
+}
 
 /* ========= COMPRAR AHORA / CHECKOUT ========= */
-function buyNow(){
-  // compra inmediata: agrega 1 del variant seleccionado y abre checkout
+function buyNow() {
   const variant = document.getElementById("variantSelect").value;
-  const p = current;
-
-  const tempOrder = [{ id: p.id, variant, qty: 1 }];
+  const tempOrder = [{ id: current.id, variant, qty: 1 }];
   openCheckout(tempOrder);
 }
 
-function checkout(){
-  // checkout del carrito completo
+function checkout() {
   if (cart.length === 0) return;
   openCheckout(cart);
 }
 
-function openCheckout(orderItems){
+function openCheckout(orderItems) {
   const modal = document.getElementById("checkoutModal");
-  const body  = document.getElementById("checkoutBody");
+  const body = document.getElementById("checkoutBody");
 
   let total = 0;
 
-  const htmlItems = orderItems.map(it => {
-    const p = findProduct(it.id);
-    const sub = p.priceNow * it.qty;
-    total += sub;
-    return `
-      <div class="cart-item" style="grid-template-columns:70px 1fr auto;">
-        <img src="${p.images[0]}" alt="${p.name}" style="width:70px; height:60px;">
-        <div>
-          <h4>${p.name}</h4>
-          <div class="muted">${it.variant} • Cantidad: ${it.qty}</div>
+  const htmlItems = orderItems
+    .map((it) => {
+      const p = findProduct(it.id);
+      const sub = p.priceNow * it.qty;
+      total += sub;
+      return `
+        <div class="cart-item" style="grid-template-columns:70px 1fr auto;">
+          <img src="${p.images[0]}" alt="${p.name}" style="width:70px; height:60px;">
+          <div>
+            <h4>${p.name}</h4>
+            <div class="muted">${it.variant} • Cantidad: ${it.qty}</div>
+          </div>
+          <div class="now">${money(sub)}</div>
         </div>
-        <div class="now">${money(sub)}</div>
-      </div>
-    `;
-  }).join("");
+      `;
+    })
+    .join("");
 
   body.innerHTML = `
     <div class="muted" style="margin-bottom:10px;">Revisa tu pedido antes de confirmar.</div>
@@ -478,6 +523,7 @@ function openCheckout(orderItems){
       <div class="now">Total</div>
       <div class="now">${money(total)}</div>
     </div>
+
     <div class="reviews" style="margin-top:12px;">
       <div class="muted"><strong>Datos de compra (ejemplo)</strong></div>
       <div class="pdp-row" style="margin-top:10px;">
@@ -487,35 +533,40 @@ function openCheckout(orderItems){
       <div class="pdp-row" style="margin-top:8px;">
         <input id="cAddress" placeholder="Dirección (opcional)" style="width:100%;padding:12px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.6);color:var(--text);">
       </div>
-      <div class="muted" style="margin-top:8px;">Luego esto lo conectamos a pago real o a WhatsApp si tú quieres.</div>
+      <div class="muted" style="margin-top:8px;">Luego esto lo conectamos a pago real.</div>
     </div>
   `;
 
   modal.classList.add("open");
 }
 
-function closeCheckout(){ document.getElementById("checkoutModal").classList.remove("open"); }
+function closeCheckout() {
+  document.getElementById("checkoutModal").classList.remove("open");
+}
 
-function confirmOrder(){
-  // Simulación de confirmación
+function confirmOrder() {
   closeCheckout();
   closeCart();
 
-  // Vaciar carrito si quieres:
   cart = [];
   save(LS_CART, cart);
   updateCounts();
 
-  alert("✅ Pedido confirmado (simulado). Luego conectamos pago real.");
+  alert("✅ Pedido confirmado (simulado).");
 }
 
 /* ========= COUNTS ========= */
-function updateCounts(){
+function updateCounts() {
   const cartCount = cart.reduce((a, x) => a + (x.qty || 0), 0);
-  document.getElementById("cartCount").textContent = `(${cartCount})`;
-  document.getElementById("favCount").textContent  = `(${fav.length})`;
+
+  const elCart = document.getElementById("cartCount");
+  const elFav = document.getElementById("favCount");
+
+  if (elCart) elCart.textContent = `(${cartCount})`;
+  if (elFav) elFav.textContent = `(${fav.length})`;
 }
 
 /* ========= INIT ========= */
 renderPDP();
+
 
