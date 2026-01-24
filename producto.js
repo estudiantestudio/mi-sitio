@@ -1,6 +1,72 @@
 /* ========= DATOS (EDITA AQUÍ tus productos) ========= */
 const PRODUCTS = [
   {
+    /* ========= INTENCIONES (LISTA OFICIAL) ========= */
+const INTENCIONES = {
+  "Relajación / Anti-estrés 🌙": [
+    "Lavanda (English Lavender)",
+    "Manzanilla (Chamomile)",
+    "Rosa (Rose)",
+    "Vainilla (Vanilla)",
+    "Vanilla Rose",
+    "Mirra (Myrrh)",
+    "Sandalwood",
+    "Chandan (sándalo indio)",
+    "Jasmine (Jazmín)",
+    "Casa Pura",
+    "Anahata (chakra corazón – LOVE)",
+    "Sahasrara (chakra corona – SPIRIT)",
+  ],
+  "Meditación / Espiritualidad 🧘": [
+    "Nag Champa",
+    "Champa",
+    "Patchouli",
+    "Ajna (INSIGHT)",
+    "Vishuddha (TRUTH)",
+    "Svadhishthana (FLOW)",
+    "Muladhara (ROOT)",
+    "Sahasrara (SPIRIT)",
+    "Oud Crystal",
+  ],
+  "Limpieza energética / Protección 🔥": [
+    "Palo Santo",
+    "Palo Santo + Romero",
+    "Palo Santo + Rosa",
+    "Palo Santo + Lemongrass",
+    "Palo Santo + Yagra",
+    "Palo Santo + Manzanilla",
+    "Palo Santo + Eucalipto",
+    "Aruda (Ruda)",
+    "After Scent",
+    "Yagra",
+  ],
+  "Energía / Enfoque / Activación ⚡": [
+    "Eucalipto",
+    "Lemongrass",
+    "Rosemary (Romero)",
+    "Manipura (POWER)",
+    "Powers",
+    "Cinnamon (Canela)",
+  ],
+  "Dulces / Cálidos / Sensoriales 🍯": [
+    "Vainilla",
+    "Vanilla Rose",
+    "Canela",
+    "Rosa",
+    "Oud Crystal",
+    "Sandalwood",
+  ],
+  "Naturales / Herbales 🌿": [
+    "Eucalipto",
+    "Lemongrass",
+    "Rosemary",
+    "Patchouli",
+    "Aruda",
+    "Palo Santo",
+    "Casa Pura",
+  ],
+};
+
     id: "incienso-romero",
     name: "Incienso de Romero – Enfoque natural",
     hook: "Claridad mental y energía suave para días de estudio o trabajo.",
