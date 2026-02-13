@@ -103,15 +103,19 @@ function renderGrid(){
       </div>
     `;
 
-    // Touch-friendly: tap abre overlay
-    card.addEventListener("click", (e) => {
-      const isButton = e.target.closest("button") || e.target.closest("a");
-      if (isButton) return;
-      card.classList.toggle("zn-touch-open");
-    });
+  card.addEventListener("click", (e) => {
+  if (!window.matchMedia("(hover: none)").matches) return;
+  const isButton = e.target.closest("button") || e.target.closest("a");
+  if (isButton) return;
 
-    grid.appendChild(card);
+  document.querySelectorAll(".zn-card.zn-touch-open").forEach(c => {
+    if (c !== card) c.classList.remove("zn-touch-open");
   });
+
+  card.classList.toggle("zn-touch-open");
+});
+
+
 }
 
 /* ================
@@ -227,11 +231,10 @@ window.ZN = {
     save(LS_CART, cart);
     setCounts();
     if (!silent){
-      showToast("Agregado");
-      this.openCart();
-    } else {
-      showToast("Agregado");
-    }
+  showToast("Agregado");
+  this.openCart();
+}
+
     renderCart();
   },
 
@@ -265,13 +268,14 @@ window.ZN = {
   },
 
   webpay(id){
-    alert("WebPay (demo): aquí conectas el pago real para " + id);
+  showToast("WebPay listo (demo)");
   },
 
   checkout(){
-    if (!cart.length) return;
-    alert("Checkout (demo): aquí conectas WebPay real / WhatsApp.");
-  },
+  if (!cart.length) return;
+  showToast("Checkout listo (demo)");
+}
+
 
   openFav(){
     renderFav();
