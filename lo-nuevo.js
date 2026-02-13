@@ -113,6 +113,8 @@ function renderGrid(){
   });
 
   card.classList.toggle("zn-touch-open");
+     grid.appendChild(card); 
+
 });
 
 
