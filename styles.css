@@ -749,4 +749,434 @@ a{color:inherit;text-decoration:none}
   .mv-grid{grid-template-columns: 1fr;}
 }
 
+/* ==========================================
+   LO NUEVO (ZARA STYLE) — SOLO EN lo-nuevo.html
+   No afecta el resto del sitio.
+   ========================================== */
+
+.zara-new{
+  background:#fff !important;
+  color:#111;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.zara-new a{ text-decoration:none; color:inherit; }
+
+.zn-header{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background:#fff;
+  border-bottom:1px solid rgba(0,0,0,.08);
+}
+
+.zn-top{
+  max-width:1200px;
+  margin:0 auto;
+  padding:16px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.zn-brand-mark{
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  letter-spacing: .6px;
+}
+
+.zn-actions{ display:flex; gap:14px; align-items:center; }
+.zn-link{
+  font-size:13px;
+  letter-spacing:.3px;
+  text-transform: uppercase;
+  border-bottom: 1px solid transparent;
+}
+.zn-link:hover{ border-bottom-color: rgba(0,0,0,.45); }
+
+.zn-iconbtn{
+  border:none;
+  background:transparent;
+  cursor:pointer;
+  font-size:14px;
+  letter-spacing:.2px;
+  display:flex;
+  gap:8px;
+  align-items:center;
+  color:#111;
+}
+.zn-iconbtn span{
+  font-weight:700;
+  font-size:12px;
+  min-width:18px;
+  text-align:center;
+}
+
+.zn-wrap{ max-width:1200px; margin:0 auto; padding: 26px 16px 60px; }
+
+.zn-hero{
+  text-align:center;
+  padding: 18px 0 26px;
+}
+.zn-kicker{
+  font-size:12px;
+  letter-spacing:2.8px;
+  text-transform: uppercase;
+  color: rgba(0,0,0,.55);
+  margin-bottom:10px;
+}
+.zn-title{
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  letter-spacing: 1.6px;
+  font-size: clamp(26px, 3.2vw, 44px);
+  margin: 0;
+}
+.zn-subtitle{
+  margin-top:10px;
+  font-size:13px;
+  letter-spacing:.2px;
+  color: rgba(0,0,0,.55);
+}
+
+/* Grid */
+.zn-grid{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 26px;
+  margin-top: 18px;
+}
+@media (max-width: 980px){
+  .zn-grid{ grid-template-columns: repeat(2, 1fr); gap:22px; }
+}
+@media (max-width: 520px){
+  .zn-grid{ grid-template-columns: 1fr; gap:18px; }
+}
+
+/* Card Zara */
+.zn-card{ background:#fff; }
+.zn-imgwrap{
+  position: relative;
+  overflow:hidden;
+  background:#fff;
+}
+.zn-imgwrap img{
+  width:100%;
+  height: 420px;
+  object-fit: cover;
+  display:block;
+  transform: scale(1);
+  transition: transform .35s ease;
+}
+@media (max-width: 520px){
+  .zn-imgwrap img{ height: 380px; }
+}
+
+.zn-badge{
+  position:absolute;
+  top:12px;
+  left:12px;
+  font-size:11px;
+  letter-spacing:1.6px;
+  text-transform: uppercase;
+  color: rgba(0,0,0,.75);
+  background: rgba(255,255,255,.82);
+  padding: 6px 10px;
+  border:1px solid rgba(0,0,0,.12);
+}
+
+/* Hover overlay (botones aparecen SOLO en hover) */
+.zn-hover{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  padding: 16px;
+  background: rgba(0,0,0,.08);
+  opacity:0;
+  transition: opacity .22s ease;
+}
+.zn-card:hover .zn-hover{ opacity: 1; }
+.zn-card:hover .zn-imgwrap img{ transform: scale(1.03); }
+
+/* Mobile/touch: si se abre por click */
+.zn-card.touch-open .zn-hover{ opacity: 1; }
+
+.zn-hover-actions{
+  width: min(420px, 100%);
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(0,0,0,.12);
+  padding: 14px;
+}
+
+/* Info */
+.zn-info{
+  padding: 12px 2px 2px;
+  text-align:center;
+}
+.zn-name{
+  font-size:12px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+.zn-price{
+  font-size:12px;
+  color: rgba(0,0,0,.65);
+  margin-top: 6px;
+}
+
+/* Botones Zara */
+.zn-btn{
+  width:100%;
+  padding: 12px 12px;
+  border:none;
+  cursor:pointer;
+  font-size: 12px;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  background: transparent;
+  color:#111;
+  transition: opacity .15s ease, transform .08s ease;
+}
+.zn-btn:active{ transform: scale(.99); }
+
+.zn-btn-text{
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0,0,0,.18);
+  text-align:center;
+}
+.zn-btn-text:hover{ border-bottom-color: rgba(0,0,0,.55); }
+
+.zn-btn-black{
+  background:#111;
+  color:#fff;
+}
+.zn-btn-black:hover{ opacity:.92; }
+
+.zn-btn-line{
+  border: 1px solid rgba(0,0,0,.25);
+}
+.zn-btn-line:hover{ border-color: rgba(0,0,0,.55); }
+
+.zn-btn-ghost{
+  color: rgba(0,0,0,.65);
+  padding: 10px 12px;
+}
+.zn-btn-ghost:hover{ color:#111; }
+
+.zn-row{
+  display:flex;
+  gap: 10px;
+  margin: 10px 0;
+  align-items:center;
+}
+
+.zn-iconmini{
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(0,0,0,.18);
+  background: #fff;
+  cursor:pointer;
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* Toast */
+.zn-toast{
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,.88);
+  color:#fff;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing: .6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+  z-index: 9999;
+}
+.zn-toast.show{
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+/* Modales drawer derecha */
+.zn-modal{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.22);
+  display:none;
+  justify-content:flex-end;
+  z-index: 9998;
+}
+.zn-modal.open{ display:flex; }
+
+.zn-drawer{
+  width: min(520px, 92vw);
+  height: 100%;
+  background:#fff;
+  border-left:1px solid rgba(0,0,0,.12);
+  transform: translateX(18px);
+  animation: znIn .18s ease both;
+  display:flex;
+  flex-direction:column;
+}
+@keyframes znIn{
+  from{ opacity:0; transform: translateX(22px); }
+  to{ opacity:1; transform: translateX(0); }
+}
+
+.zn-drawer-head{
+  padding: 16px;
+  border-bottom:1px solid rgba(0,0,0,.08);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.zn-drawer-title{
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(0,0,0,.65);
+}
+.zn-close{
+  border:none;
+  background:transparent;
+  cursor:pointer;
+  font-size: 16px;
+}
+
+.zn-drawer-body{
+  padding: 16px;
+  overflow:auto;
+  flex:1;
+}
+
+.zn-empty{
+  color: rgba(0,0,0,.55);
+  font-size: 13px;
+  padding: 18px 0;
+}
+
+.zn-drawer-foot{
+  padding: 16px;
+  border-top:1px solid rgba(0,0,0,.08);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.zn-total{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: rgba(0,0,0,.65);
+}
+.zn-total strong{
+  font-size: 14px;
+  color:#111;
+}
+
+/* Items carrito/favs */
+.zn-cart-item, .zn-fav-item{
+  display:grid;
+  grid-template-columns: 86px 1fr 160px;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0,0,0,.08);
+}
+.zn-cart-item img, .zn-fav-item img{
+  width: 86px;
+  height: 86px;
+  object-fit: cover;
+  background:#f7f7f7;
+}
+.zn-cart-mid{
+  display:flex;
+  flex-direction:column;
+  gap: 6px;
+}
+.zn-cart-name{
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+.zn-cart-price{
+  font-size: 12px;
+  color: rgba(0,0,0,.55);
+}
+.zn-cart-right{
+  display:flex;
+  flex-direction:column;
+  gap: 10px;
+  align-items:flex-end;
+  justify-content:space-between;
+}
+.zn-qty{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+}
+.zn-qbtn{
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(0,0,0,.18);
+  background:#fff;
+  cursor:pointer;
+}
+.zn-qnum{
+  min-width: 18px;
+  text-align:center;
+  font-weight:700;
+}
+.zn-cart-sub{
+  font-size: 12px;
+  color:#111;
+}
+.zn-remove{
+  border:none;
+  background:transparent;
+  cursor:pointer;
+  font-size: 12px;
+  letter-spacing:.6px;
+  text-transform: uppercase;
+  color: rgba(0,0,0,.55);
+}
+.zn-remove:hover{ color:#111; }
+
+/* Favoritos acciones */
+.zn-fav-actions{
+  display:flex;
+  gap: 10px;
+  flex-wrap:wrap;
+  margin-top: 8px;
+}
+.zn-fav-actions .zn-btn{ width:auto; }
+/* Link premium LO NUEVO (en el menú principal) */
+.nav-item.nav-new{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px solid rgba(90,70,52,.18);
+  background: rgba(255,255,255,.06);
+}
+.nav-item.nav-new .new-title{
+  font-weight:950;
+  letter-spacing:.2px;
+}
+.nav-item.nav-new .new-sub{
+  font-size:12px;
+  color: var(--muted);
+}
+
 
