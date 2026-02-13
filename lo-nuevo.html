@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lo nuevo | Comfort Home</title>
+  <meta name="description" content="Lo nuevo en Comfort Home. Estilo premium minimalista, productos recientes y compra rápida.">
+
+  <!-- Tipografías Zara-style -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- TU CSS principal -->
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+
+<body class="zara-new">
+
+  <!-- Header minimal (blanco puro) -->
+  <header class="zn-header">
+    <div class="zn-top">
+      <a href="index.html" class="zn-brand">
+        <span class="zn-brand-mark">Comfort Home</span>
+      </a>
+
+      <div class="zn-actions">
+        <button class="zn-iconbtn" onclick="ZN.openFavorites()" aria-label="Favoritos">
+          ♡ <span id="znFavCount">0</span>
+        </button>
+        <button class="zn-iconbtn" onclick="ZN.openCart()" aria-label="Carrito">
+          🛒 <span id="znCartCount">0</span>
+        </button>
+        <a class="zn-link" href="index.html">Volver</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Título premium -->
+  <main class="zn-wrap">
+    <section class="zn-hero">
+      <div class="zn-kicker">NEW IN</div>
+      <h1 class="zn-title">LO NUEVO</h1>
+      <p class="zn-subtitle">Descubre la nueva colección</p>
+    </section>
+
+    <!-- Grid Zara style -->
+    <section class="zn-grid" id="znGrid"></section>
+  </main>
+
+  <!-- TOAST -->
+  <div class="zn-toast" id="znToast">Agregado</div>
+
+  <!-- CARRITO (drawer derecha) -->
+  <div class="zn-modal" id="znCartModal" aria-hidden="true">
+    <div class="zn-drawer">
+      <div class="zn-drawer-head">
+        <div class="zn-drawer-title">CARRITO</div>
+        <button class="zn-close" onclick="ZN.closeCart()">✕</button>
+      </div>
+
+      <div class="zn-drawer-body" id="znCartList"></div>
+
+      <div class="zn-drawer-foot">
+        <div class="zn-total">
+          <span>TOTAL</span>
+          <strong id="znCartTotal">$0</strong>
+        </div>
+        <button class="zn-btn zn-btn-black" onclick="ZN.checkout()">FINALIZAR COMPRA</button>
+        <button class="zn-btn zn-btn-line" onclick="ZN.closeCart()">SEGUIR COMPRANDO</button>
+        <button class="zn-btn zn-btn-ghost" onclick="ZN.payWebpay()">Pagar con WebPay</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAVORITOS (drawer derecha) -->
+  <div class="zn-modal" id="znFavModal" aria-hidden="true">
+    <div class="zn-drawer">
+      <div class="zn-drawer-head">
+        <div class="zn-drawer-title">FAVORITOS</div>
+        <button class="zn-close" onclick="ZN.closeFavorites()">✕</button>
+      </div>
+
+      <div class="zn-drawer-body" id="znFavList"></div>
+
+      <div class="zn-drawer-foot">
+        <button class="zn-btn zn-btn-black" onclick="ZN.addAllFavToCart()">MOVER TODO AL CARRITO</button>
+        <button class="zn-btn zn-btn-line" onclick="ZN.closeFavorites()">CERRAR</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS de la página -->
+  <script src="lo-nuevo.js"></script>
+</body>
+</html>
