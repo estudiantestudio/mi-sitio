@@ -1,47 +1,41 @@
-/* =========================
-   LO NUEVO (ZARA STYLE)
-   ========================= */
+/* ============================
+   LO NUEVO — ZARA STYLE (Premium)
+   ============================ */
 
-/**
- * IMPORTANT:
- * - Si quieres que "Ver producto" funcione con tu producto.html,
- *   usa IDs que EXISTAN en tu producto.js / catálogo real.
- * - Si todavía no existen, igual funciona la página, pero "Ver producto" no mostrará el producto correcto.
- */
-const NEW_PRODUCTS = [
+const ZN_PRODUCTS = [
   {
     id: "incienso-vanilla",
     name: "INCIENSO VAINILLA",
     price: 3990,
-    badge: "NEW",
-    img: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1400&q=80"
+    img: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1600&q=80",
+    badge: "NEW"
   },
   {
     id: "incienso-lavanda",
     name: "INCIENSO LAVANDA",
     price: 3990,
-    badge: "NEW",
-    img: "https://images.unsplash.com/photo-1519682577862-22b62b24e493?auto=format&fit=crop&w=1400&q=80"
+    img: "https://images.unsplash.com/photo-1519682577862-22b62b24e493?auto=format&fit=crop&w=1600&q=80",
+    badge: "NEW"
   },
   {
     id: "incienso-eucalipto",
     name: "INCIENSO EUCALIPTO",
     price: 3990,
-    badge: "NEW",
-    img: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1400&q=80"
+    img: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1600&q=80",
+    badge: "NEW"
   },
   {
     id: "incienso-romero",
     name: "INCIENSO ROMERO",
     price: 3990,
-    badge: "NEW",
-    img: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1400&q=80"
+    img: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1600&q=80",
+    badge: "NEW"
   }
 ];
 
-/* Storage (usa los mismos nombres que ya vienes usando) */
-const LS_CART = "ch_cart_v1"; // [{id, qty}]
-const LS_FAV  = "ch_fav_v1";  // [id]
+// LocalStorage keys (mantenlos consistentes)
+const LS_CART = "ch_cart_v1";
+const LS_FAV  = "ch_fav_v1";
 
 const load = (k, fallback) => {
   try { return JSON.parse(localStorage.getItem(k)) ?? fallback; }
@@ -49,282 +43,267 @@ const load = (k, fallback) => {
 };
 const save = (k, v) => localStorage.setItem(k, JSON.stringify(v));
 
-const money = (n) => "$" + (n || 0).toLocaleString("es-CL");
+let cart = load(LS_CART, []); // [{id, qty}]
+let fav  = load(LS_FAV, []);  // [id]
 
-let cart = load(LS_CART, []);
-let fav  = load(LS_FAV, []);
+const $ = (id) => document.getElementById(id);
+const money = (n) => "$" + Number(n || 0).toLocaleString("es-CL");
 
-const grid = document.getElementById("znGrid");
-const toast = document.getElementById("znToast");
-
-function isFav(id){ return fav.includes(id); }
-
-function updateCounts(){
-  const cartCount = cart.reduce((a,x)=> a + (x.qty || 0), 0);
-  document.getElementById("znCartCount").textContent = cartCount;
-  document.getElementById("znFavCount").textContent  = fav.length;
-}
+const toastEl = () => $("znToast");
 
 function showToast(msg){
-  toast.textContent = msg;
-  toast.classList.add("show");
-  setTimeout(()=> toast.classList.remove("show"), 1200);
+  const t = toastEl();
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 1200);
 }
 
-function render(){
+function isFav(id){ return fav.includes(id); }
+function getP(id){ return ZN_PRODUCTS.find(p => p.id === id); }
+
+function setCounts(){
+  const cartCount = cart.reduce((a, x) => a + (x.qty || 0), 0);
+  $("znCartCount").textContent = cartCount;
+  $("znFavCount").textContent = fav.length;
+}
+
+function renderGrid(){
+  const grid = $("znGrid");
   grid.innerHTML = "";
-  NEW_PRODUCTS.forEach(p => grid.appendChild(cardEl(p)));
-  updateCounts();
-}
 
-/* Card Zara-style: botones aparecen en hover */
-function cardEl(p){
-  const el = document.createElement("article");
-  el.className = "zn-card";
+  ZN_PRODUCTS.forEach(p => {
+    const card = document.createElement("article");
+    card.className = "zn-card" + (isFav(p.id) ? " zn-faved" : "");
+    card.innerHTML = `
+      <div class="zn-imgwrap">
+        <img src="${p.img}" alt="${p.name}">
+        <div class="zn-badge">${p.badge || "NEW"}</div>
 
-  el.innerHTML = `
-    <div class="zn-imgwrap">
-      <img src="${p.img}" alt="${p.name}">
-      <div class="zn-badge">${p.badge || "NEW"}</div>
+        <!-- Overlay (solo hover) -->
+        <div class="zn-overlay">
+          <div class="zn-overlay-inner">
+            <a class="zn-act zn-act-link" href="producto.html?id=${encodeURIComponent(p.id)}">VER PRODUCTO</a>
 
-      <div class="zn-hover">
-        <div class="zn-hover-actions">
-          <a class="zn-btn zn-btn-text" href="producto.html?id=${encodeURIComponent(p.id)}">Ver producto</a>
+            <div class="zn-row">
+              <button class="zn-iconmini" onclick="ZN.toggleFav('${p.id}')" aria-label="Favorito">
+                <span class="zn-heart">${isFav(p.id) ? "♥" : "♡"}</span>
+              </button>
+              <button class="zn-act zn-act-black" onclick="ZN.addToCart('${p.id}', 1)">AGREGAR</button>
+            </div>
 
-          <div class="zn-row">
-            <button class="zn-iconmini" data-fav="${p.id}" aria-label="Favorito">${isFav(p.id) ? "♥" : "♡"}</button>
-            <button class="zn-btn zn-btn-black" data-add="${p.id}">Agregar</button>
+            <button class="zn-act zn-act-line" onclick="ZN.buyNow('${p.id}')">COMPRAR AHORA</button>
+            <button class="zn-act zn-act-ghost" onclick="ZN.webpay('${p.id}')">PAGAR CON WEBPAY</button>
           </div>
-
-          <button class="zn-btn zn-btn-line" data-buy="${p.id}">Comprar ahora</button>
-          <button class="zn-btn zn-btn-ghost" data-webpay="${p.id}">Pagar con WebPay</button>
         </div>
       </div>
-    </div>
 
-    <div class="zn-info">
-      <div class="zn-name">${p.name}</div>
-      <div class="zn-price">${money(p.price)}</div>
-    </div>
-  `;
+      <div class="zn-info">
+        <div class="zn-name">${p.name}</div>
+        <div class="zn-price">${money(p.price)}</div>
+      </div>
+    `;
 
-  // Mobile/touch: si tocas la imagen, muestra overlay (porque no hay hover)
-  el.querySelector(".zn-imgwrap").addEventListener("click", (e) => {
-    const isButton = e.target.closest("button,a");
-    if (isButton) return;
-    el.classList.toggle("touch-open");
+    // Touch-friendly: tap abre overlay
+    card.addEventListener("click", (e) => {
+      const isButton = e.target.closest("button") || e.target.closest("a");
+      if (isButton) return;
+      card.classList.toggle("zn-touch-open");
+    });
+
+    grid.appendChild(card);
   });
-
-  // botones
-  el.querySelector(`[data-fav="${p.id}"]`).addEventListener("click", (e) => {
-    e.preventDefault();
-    toggleFav(p.id);
-    // refresca solo el icono
-    e.target.textContent = isFav(p.id) ? "♥" : "♡";
-  });
-
-  el.querySelector(`[data-add="${p.id}"]`).addEventListener("click", (e) => {
-    e.preventDefault();
-    addToCart(p.id, 1);
-    showToast("Agregado al carrito");
-    ZN.openCart();
-  });
-
-  el.querySelector(`[data-buy="${p.id}"]`).addEventListener("click", (e) => {
-    e.preventDefault();
-    buyNow(p.id);
-  });
-
-  el.querySelector(`[data-webpay="${p.id}"]`).addEventListener("click", (e) => {
-    e.preventDefault();
-    payWebpay(p.id);
-  });
-
-  return el;
 }
 
-/* Favoritos */
-function toggleFav(id){
-  if (isFav(id)) fav = fav.filter(x => x !== id);
-  else fav.push(id);
-  save(LS_FAV, fav);
-  updateCounts();
-}
+/* ================
+   Favorites
+   ================ */
+function renderFav(){
+  const body = $("znFavBody");
+  const items = fav.map(id => getP(id)).filter(Boolean);
 
-/* Carrito */
-function addToCart(id, qty=1){
-  const it = cart.find(x => x.id === id);
-  if (it) it.qty += qty;
-  else cart.push({ id, qty });
-  save(LS_CART, cart);
-  updateCounts();
-}
-
-function removeCartIndex(i){
-  cart.splice(i,1);
-  save(LS_CART, cart);
-  renderCart();
-  updateCounts();
-}
-
-function incQty(i){
-  cart[i].qty++;
-  save(LS_CART, cart);
-  renderCart();
-  updateCounts();
-}
-
-function decQty(i){
-  cart[i].qty--;
-  if (cart[i].qty <= 0) cart.splice(i,1);
-  save(LS_CART, cart);
-  renderCart();
-  updateCounts();
-}
-
-function renderCart(){
-  const list = document.getElementById("znCartList");
-  const totalEl = document.getElementById("znCartTotal");
-  list.innerHTML = "";
-
-  if (!cart.length){
-    list.innerHTML = `<div class="zn-empty">Tu carrito está vacío.</div>`;
-    totalEl.textContent = money(0);
+  if (!items.length){
+    body.innerHTML = `<div class="zn-empty">No tienes favoritos todavía.</div>`;
     return;
   }
 
-  let total = 0;
-
-  cart.forEach((it, idx) => {
-    const p = NEW_PRODUCTS.find(x => x.id === it.id);
-    if (!p) return;
-    const sub = (p.price || 0) * (it.qty || 1);
-    total += sub;
-
-    const row = document.createElement("div");
-    row.className = "zn-cart-item";
-    row.innerHTML = `
+  body.innerHTML = items.map(p => `
+    <div class="zn-fav-item">
       <img src="${p.img}" alt="${p.name}">
       <div class="zn-cart-mid">
         <div class="zn-cart-name">${p.name}</div>
         <div class="zn-cart-price">${money(p.price)}</div>
-      </div>
-      <div class="zn-cart-right">
-        <div class="zn-qty">
-          <button class="zn-qbtn" aria-label="Menos">−</button>
-          <span class="zn-qnum">${it.qty}</span>
-          <button class="zn-qbtn" aria-label="Más">+</button>
+        <div class="zn-fav-actions">
+          <a class="zn-mini-link" href="producto.html?id=${encodeURIComponent(p.id)}">VER</a>
+          <button class="zn-mini-btn" onclick="ZN.addToCart('${p.id}', 1, true)">AGREGAR</button>
+          <button class="zn-mini-btn" onclick="ZN.removeFav('${p.id}')">QUITAR</button>
         </div>
-        <div class="zn-cart-sub">${money(sub)}</div>
-        <button class="zn-remove" aria-label="Eliminar">Eliminar</button>
       </div>
-    `;
-
-    const [bMinus, bPlus] = row.querySelectorAll(".zn-qbtn");
-    bMinus.addEventListener("click", ()=> decQty(idx));
-    bPlus.addEventListener("click", ()=> incQty(idx));
-    row.querySelector(".zn-remove").addEventListener("click", ()=> removeCartIndex(idx));
-
-    list.appendChild(row);
-  });
-
-  totalEl.textContent = money(total);
+    </div>
+  `).join("");
 }
 
-/* Checkout / Compra */
-function buyNow(id){
-  addToCart(id, 1);
-  ZN.openCart();
+/* ================
+   Cart
+   ================ */
+function cartTotal(){
+  return cart.reduce((sum, it) => {
+    const p = getP(it.id);
+    if (!p) return sum;
+    return sum + (p.price * (it.qty || 0));
+  }, 0);
 }
 
-function checkout(){
-  if (!cart.length) return;
-  alert("✅ Checkout (demo). Aquí conectas WebPay real / WePay y datos de envío.");
-}
+function renderCart(){
+  const body = $("znCartBody");
 
-function payWebpay(id){
-  if (id) alert("💳 WebPay (demo): pago directo para " + id);
-  else alert("💳 WebPay (demo): pago del carrito");
-}
-
-/* Favoritos drawer */
-function renderFav(){
-  const list = document.getElementById("znFavList");
-  list.innerHTML = "";
-
-  if (!fav.length){
-    list.innerHTML = `<div class="zn-empty">Aún no tienes favoritos.</div>`;
+  if (!cart.length){
+    body.innerHTML = `<div class="zn-empty">Tu carrito está vacío.</div>`;
+    $("znCartTotal").textContent = money(0);
     return;
   }
 
-  fav.map(id => NEW_PRODUCTS.find(p => p.id === id))
-    .filter(Boolean)
-    .forEach(p => {
-      const row = document.createElement("div");
-      row.className = "zn-fav-item";
-      row.innerHTML = `
+  body.innerHTML = cart.map((it, idx) => {
+    const p = getP(it.id);
+    if (!p) return "";
+    const sub = p.price * it.qty;
+
+    return `
+      <div class="zn-cart-item">
         <img src="${p.img}" alt="${p.name}">
-        <div class="zn-fav-mid">
+        <div class="zn-cart-mid">
           <div class="zn-cart-name">${p.name}</div>
           <div class="zn-cart-price">${money(p.price)}</div>
-          <div class="zn-fav-actions">
-            <a class="zn-btn zn-btn-text" href="producto.html?id=${encodeURIComponent(p.id)}">Ver producto</a>
-            <button class="zn-btn zn-btn-black" data-addfav="${p.id}">Agregar</button>
-            <button class="zn-btn zn-btn-line" data-removefav="${p.id}">Quitar</button>
-          </div>
         </div>
-      `;
+        <div class="zn-cart-right">
+          <div class="zn-qty">
+            <button class="zn-qbtn" onclick="ZN.decQty(${idx})">−</button>
+            <div class="zn-qnum">${it.qty}</div>
+            <button class="zn-qbtn" onclick="ZN.incQty(${idx})">+</button>
+          </div>
+          <div class="zn-cart-sub">${money(sub)}</div>
+          <button class="zn-remove" onclick="ZN.removeCart(${idx})">ELIMINAR</button>
+        </div>
+      </div>
+    `;
+  }).join("");
 
-      row.querySelector(`[data-addfav="${p.id}"]`).addEventListener("click", ()=> {
-        addToCart(p.id, 1);
-        showToast("Agregado al carrito");
-        updateCounts();
-      });
-
-      row.querySelector(`[data-removefav="${p.id}"]`).addEventListener("click", ()=> {
-        fav = fav.filter(x => x !== p.id);
-        save(LS_FAV, fav);
-        renderFav();
-        updateCounts();
-      });
-
-      list.appendChild(row);
-    });
+  $("znCartTotal").textContent = money(cartTotal());
 }
 
-/* API global */
+/* ================
+   Public API (window.ZN)
+   ================ */
 window.ZN = {
+  toggleFav(id){
+    if (isFav(id)) fav = fav.filter(x => x !== id);
+    else fav.push(id);
+    save(LS_FAV, fav);
+    setCounts();
+    renderGrid();
+    // si drawer abierto, refresca
+    if ($("znFavModal").classList.contains("open")) renderFav();
+  },
+
+  removeFav(id){
+    fav = fav.filter(x => x !== id);
+    save(LS_FAV, fav);
+    setCounts();
+    renderGrid();
+    renderFav();
+  },
+
+  favMoveAllToCart(){
+    if (!fav.length) return;
+    fav.forEach(id => this.addToCart(id, 1, true));
+    this.openCart();
+    showToast("Movido al carrito");
+  },
+
+  addToCart(id, qty=1, silent=false){
+    const ex = cart.find(x => x.id === id);
+    if (ex) ex.qty += qty;
+    else cart.push({ id, qty });
+
+    save(LS_CART, cart);
+    setCounts();
+    if (!silent){
+      showToast("Agregado");
+      this.openCart();
+    } else {
+      showToast("Agregado");
+    }
+    renderCart();
+  },
+
+  incQty(i){
+    cart[i].qty++;
+    save(LS_CART, cart);
+    setCounts();
+    renderCart();
+  },
+
+  decQty(i){
+    cart[i].qty--;
+    if (cart[i].qty <= 0) cart.splice(i, 1);
+    save(LS_CART, cart);
+    setCounts();
+    renderCart();
+  },
+
+  removeCart(i){
+    cart.splice(i, 1);
+    save(LS_CART, cart);
+    setCounts();
+    renderCart();
+  },
+
+  buyNow(id){
+    // compra rápida: 1 unidad -> abre drawer carrito
+    this.addToCart(id, 1, true);
+    this.openCart();
+    showToast("Compra rápida lista");
+  },
+
+  webpay(id){
+    alert("WebPay (demo): aquí conectas el pago real para " + id);
+  },
+
+  checkout(){
+    if (!cart.length) return;
+    alert("Checkout (demo): aquí conectas WebPay real / WhatsApp.");
+  },
+
+  openFav(){
+    renderFav();
+    $("znFavModal").classList.add("open");
+    $("znFavModal").setAttribute("aria-hidden", "false");
+  },
+  closeFav(){
+    $("znFavModal").classList.remove("open");
+    $("znFavModal").setAttribute("aria-hidden", "true");
+  },
+
   openCart(){
     renderCart();
-    document.getElementById("znCartModal").classList.add("open");
+    $("znCartModal").classList.add("open");
+    $("znCartModal").setAttribute("aria-hidden", "false");
   },
   closeCart(){
-    document.getElementById("znCartModal").classList.remove("open");
-  },
-  openFavorites(){
-    renderFav();
-    document.getElementById("znFavModal").classList.add("open");
-  },
-  closeFavorites(){
-    document.getElementById("znFavModal").classList.remove("open");
-  },
-  addAllFavToCart(){
-    if (!fav.length) return;
-    fav.forEach(id => addToCart(id, 1));
-    showToast("Favoritos al carrito");
-    ZN.openCart();
-  },
-  checkout,
-  payWebpay
+    $("znCartModal").classList.remove("open");
+    $("znCartModal").setAttribute("aria-hidden", "true");
+  }
 };
 
-/* Cerrar drawer al tocar fondo */
-document.getElementById("znCartModal").addEventListener("click", (e)=>{
-  if (e.target.id === "znCartModal") ZN.closeCart();
-});
-document.getElementById("znFavModal").addEventListener("click", (e)=>{
-  if (e.target.id === "znFavModal") ZN.closeFavorites();
-});
+/* INIT */
+(function init(){
+  setCounts();
+  renderGrid();
 
-/* Init */
-render();
+  // cerrar al click fuera
+  $("znFavModal").addEventListener("click", (e) => {
+    if (e.target.id === "znFavModal") ZN.closeFav();
+  });
+  $("znCartModal").addEventListener("click", (e) => {
+    if (e.target.id === "znCartModal") ZN.closeCart();
+  });
+})();
