@@ -21,13 +21,52 @@
     </div>
 
     <div class="header-actions">
-      <a class="btn ghost" href="index.html">Volver</a>
-      <button class="btn primary" onclick="irAWhatsapp()">WhatsApp</button>
-    </div>
+  <a class="btn ghost" href="index.html">Volver</a>
+  <button class="btn ghost" onclick="openFavorites()">❤️ Favoritos <span id="favCount">(0)</span></button>
+  <button class="btn primary" onclick="openCart()">🛒 Carrito <span id="cartCount">(0)</span></button>
+</div>
+
   </div>
 </header>
 
 <main>
+  <!-- CART MODAL -->
+<div class="modal" id="cartModal">
+  <div class="modal-content" style="max-width:980px;">
+    <button class="modal-close" onclick="closeCart()">✕</button>
+    <h2 style="margin-bottom:12px;">🛒 Tu carrito</h2>
+    <div id="cartList"></div>
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-top:14px;">
+      <div class="now">Total: <span id="cartTotal">$0</span></div>
+      <button class="btn primary" onclick="checkout()">Finalizar compra</button>
+    </div>
+    <p class="muted" style="margin-top:10px;">Compra simulada. Puedes pagar por WePay o comprar por WhatsApp.</p>
+  </div>
+</div>
+
+<!-- FAVORITES MODAL -->
+<div class="modal" id="favModal">
+  <div class="modal-content" style="max-width:900px;">
+    <button class="modal-close" onclick="closeFavorites()">✕</button>
+    <h2 style="margin-bottom:12px;">❤️ Mis favoritos</h2>
+    <div class="cards" id="favGrid"></div>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal" id="checkoutModal">
+  <div class="modal-content" style="max-width:900px;">
+    <button class="modal-close" onclick="closeCheckout()">✕</button>
+    <h2 style="margin-bottom:10px;">✅ Confirmar compra</h2>
+    <div id="checkoutBody"></div>
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+      <button class="btn outline" onclick="closeCheckout()">Seguir comprando</button>
+      <button class="btn primary" onclick="confirmOrder()">Confirmar pedido</button>
+    </div>
+    <p class="muted" style="margin-top:10px;">Simulación de pago. “WePay” aquí será un botón demo.</p>
+  </div>
+</div>
+
 
   <!-- HERO EMOCIONAL -->
   <section class="hero hero-mini">
@@ -149,11 +188,6 @@
   </section>
 
 </main>
-
-<script src="app.js"></script>
-<script>
-  initIncenseCategoryPage();
-</script>
 
 <script src="inciensos.js"></script>
 </body>
