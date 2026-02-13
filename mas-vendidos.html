@@ -1,37 +1,141 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🔥 Más vendidos | Comfort Home</title>
-<link rel="stylesheet" href="estilos.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🔥 Más vendidos | Comfort Home</title>
+  <meta name="description" content="Los productos más vendidos y en tendencia. Compra rápida con carrito, favoritos y pago WebPay demo.">
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+
+<body class="page-mas-vendidos">
 
 <header class="site-header">
   <div class="topbar">
     <div class="brand">
+      <span class="brand-mark">🪔</span>
       <a href="index.html" class="brand-name">Comfort Home</a>
+    </div>
+
+    <div class="search">
+      <input id="mvSearch" type="search" placeholder="🔍 Buscar en más vendidos: incienso, vela, vainilla..." />
     </div>
 
     <div class="header-actions">
       <a class="btn ghost" href="index.html">Volver</a>
-      <button class="btn ghost" onclick="openFavorites()">❤️ Favoritos</button>
-      <button class="btn primary" onclick="openCart()">🛒 Carrito</button>
+      <button class="btn ghost" onclick="openFavorites()">❤️ Favoritos <span id="favCount">(0)</span></button>
+      <button class="btn primary" onclick="openCart()">🛒 Carrito <span id="cartCount">(0)</span></button>
     </div>
+  </div>
+
+  <!-- mini barra de prueba social -->
+  <div class="mv-socialbar">
+    <div class="mv-pill">⭐ 4.8/5 promedio</div>
+    <div class="mv-pill">🚚 Envío rápido a todo Chile</div>
+    <div class="mv-pill">🔥 Lo que todos están comprando ahora</div>
   </div>
 </header>
 
-<main class="section">
+<main>
 
-  <div class="section-head">
-    <h2>🔥 Más vendidos</h2>
-    <p class="muted">Descubre lo que nuestros clientes aman esta semana</p>
-  </div>
+  <!-- HERO -->
+  <section class="hero hero-mini">
+    <div class="hero-inner">
+      <h1>🔥 Más vendidos / Top tendencia</h1>
+      <p>Descubre lo que nuestros clientes aman. Prueba social + compra rápida para reducir indecisión.</p>
 
-  <div class="cards" id="topProductsGrid"></div>
+      <div class="mv-hero-row">
+        <div class="mv-countdown">
+          <div class="mv-count-title">⏳ Oferta de tendencia termina en:</div>
+          <div class="mv-count-time" id="mvCountdown">00:00:00</div>
+          <div class="muted" style="margin-top:6px;">(Demo: contador dinámico)</div>
+        </div>
+
+        <div class="mv-filters">
+          <select id="mvSort">
+            <option value="trending">Ordenar: Tendencia 🔥</option>
+            <option value="rating">Mejor rating ⭐</option>
+            <option value="sold">Más vendidos 🏆</option>
+            <option value="priceLow">Precio: menor a mayor</option>
+            <option value="priceHigh">Precio: mayor a menor</option>
+          </select>
+          <button class="btn outline" onclick="clearMVFilters()">Limpiar</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GRID -->
+  <section class="section" id="mvGridSection">
+    <div class="section-head">
+      <div>
+        <h2>💎 Lo que todos están comprando</h2>
+        <p class="muted">Hover premium, badges, urgencia, favoritos + carrito + WebPay demo.</p>
+      </div>
+      <div class="muted" id="mvCountLabel">0 productos</div>
+    </div>
+
+    <div class="cards mv-grid" id="mvGrid"></div>
+  </section>
 
 </main>
+
+<!-- ✅ MODAL FAVORITOS -->
+<div class="modal" id="favModal">
+  <div class="modal-content" style="max-width:900px;">
+    <button class="modal-close" onclick="closeFavorites()">✕</button>
+    <h2 style="margin-bottom:12px;">❤️ Mis favoritos</h2>
+    <div class="cards" id="favGrid"></div>
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+      <button class="btn outline" onclick="closeFavorites()">Cerrar</button>
+      <button class="btn primary" onclick="favAddAllToCart()">Agregar todos al carrito</button>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ MODAL CARRITO (slide desde la derecha) -->
+<div class="modal mv-drawer" id="cartModal">
+  <div class="modal-content mv-drawer-panel">
+    <button class="modal-close" onclick="closeCart()">✕</button>
+    <h2 style="margin-bottom:12px;">🛒 Tu carrito</h2>
+    <div id="cartList"></div>
+
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-top:14px;">
+      <div class="now">Total: <span id="cartTotal">$0</span></div>
+      <button class="btn primary" onclick="checkout()">Finalizar compra</button>
+    </div>
+
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+      <button class="btn outline" onclick="closeCart()">Seguir comprando</button>
+      <button class="btn ghost" onclick="payWebpay()">💳 Pagar con WebPay</button>
+    </div>
+
+    <p class="muted" style="margin-top:10px;">Carrito demo: cantidad editable + subtotal. WebPay es botón demo.</p>
+  </div>
+</div>
+
+<!-- ✅ MODAL CHECKOUT -->
+<div class="modal" id="checkoutModal">
+  <div class="modal-content" style="max-width:900px;">
+    <button class="modal-close" onclick="closeCheckout()">✕</button>
+    <h2 style="margin-bottom:10px;">✅ Confirmar compra</h2>
+    <div id="checkoutBody"></div>
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+      <button class="btn outline" onclick="closeCheckout()">Seguir comprando</button>
+      <button class="btn primary" onclick="confirmOrder()">Confirmar pedido</button>
+      <button class="btn ghost" onclick="payWebpay()">💳 Pagar con WebPay</button>
+    </div>
+    <p class="muted" style="margin-top:10px;">Checkout simulado. Después se conecta WebPay real.</p>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="mv-toast" id="mvToast">✅ Producto agregado</div>
+
+<!-- Floating cart -->
+<button class="mv-float-cart" onclick="openCart()" aria-label="Abrir carrito">
+  🛒 <span id="floatCartCount">0</span>
+</button>
 
 <script src="mas-vendidos.js"></script>
 </body>
