@@ -34,7 +34,11 @@
 
 
 <nav class="mega-nav">
-  <a class="nav-item" href="#lo-nuevo">🕯️ Lo nuevo</a>
+
+  <a class="nav-item nav-new" href="lo-nuevo.html">
+    <span class="new-title">LO NUEVO</span>
+    <span class="new-sub">Descubre la nueva colección</span>
+  </a>
 
   <a class="nav-item nav-hot" href="mas-vendidos.html">
     <span class="hot-icon">🔥</span>
@@ -45,38 +49,34 @@
     <span class="hot-badge">Trending</span>
   </a>
 
-  <!-- lo demás de tu menú sigue igual -->
+  <div class="nav-item dropdown">
+    <button class="dropbtn">🪔 Por uso / intención</button>
+    <div class="dropdown-content">
+      <a href="#catalogo" onclick="setFilter('intencion','Relajación')">Relajación</a>
+      <a href="#catalogo" onclick="setFilter('intencion','Ritual')">Ritual</a>
+      <a href="#catalogo" onclick="setFilter('intencion','Meditación')">Meditación</a>
+      <a href="#catalogo" onclick="setFilter('intencion','Hogar aromático')">Hogar aromático</a>
+    </div>
+  </div>
+
+  <div class="dropdown nav-item">
+    <button class="dropbtn">🧿 Por tipo de producto</button>
+    <div class="dropdown-content">
+      <a href="inciensos.html">Inciensos</a>
+      <a href="velas.html">Velas</a>
+      <a href="aromatizantes.html">Aromatizantes</a>
+      <a href="kits.html">Kits</a>
+      <a href="decoracion.html">Decoración espiritual</a>
+    </div>
+  </div>
+
+  <a class="nav-item" href="#regalos">🎁 Regalos & Sets especiales</a>
+  <a class="nav-item" href="#artesanias">🪶 Artesanías</a>
+  <a class="nav-item" href="#guias">📌 Guías & Inspiración</a>
+  <a class="nav-item" href="#soporte">🛠️ Ayuda / Soporte</a>
+
 </nav>
 
-
-
-      <div class="nav-item dropdown">
-        <button class="dropbtn">🪔 Por uso / intención</button>
-        <div class="dropdown-content">
-          <a href="#catalogo" onclick="setFilter('intencion','Relajación')">Relajación</a>
-          <a href="#catalogo" onclick="setFilter('intencion','Ritual')">Ritual</a>
-          <a href="#catalogo" onclick="setFilter('intencion','Meditación')">Meditación</a>
-          <a href="#catalogo" onclick="setFilter('intencion','Hogar aromático')">Hogar aromático</a>
-        </div>
-      </div>
-
-<div class="dropdown nav-item">
-  <button class="dropbtn">🧿 Por tipo de producto</button>
-  <div class="dropdown-content">
-    <a href="inciensos.html">Inciensos</a>
-    <a href="velas.html">Velas</a>
-    <a href="aromatizantes.html">Aromatizantes</a>
-    <a href="kits.html">Kits</a>
-    <a href="decoracion.html">Decoración espiritual</a>
-  </div>
-</div>
-
-
-      <a class="nav-item" href="#regalos">🎁 Regalos & Sets especiales</a>
-      <a class="nav-item" href="#artesanias">🪶 Artesanías</a>
-      <a class="nav-item" href="#guias">📌 Guías & Inspiración</a>
-      <a class="nav-item" href="#soporte">🛠️ Ayuda / Soporte</a>
-    </nav>
   </header>
 
   <!-- HOME — La portada que inspira + convierte -->
